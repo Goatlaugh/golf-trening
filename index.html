@@ -1,0 +1,231 @@
+<!DOCTYPE html>
+<html lang="no">
+<head>
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Golf - Trening</title>
+
+<style>
+body {
+  margin:0;
+  font-family:Arial;
+  background:#0b2d1f;
+  color:white;
+}
+
+.screen {
+  display:none;
+  padding:20px;
+  padding-bottom:80px;
+}
+.active { display:block; }
+
+.card {
+  background:#123f2a;
+  padding:18px;
+  margin:10px 0;
+  border-radius:12px;
+  font-size:20px;
+  cursor:pointer;
+}
+
+img {
+  width:100%;
+  border-radius:12px;
+  margin-bottom:15px;
+}
+
+h2 {
+  margin-top:0;
+}
+
+ul {
+  padding-left:20px;
+}
+
+button {
+  width:100%;
+  padding:15px;
+  margin-top:10px;
+  border:none;
+  border-radius:10px;
+  background:#1fa463;
+  color:white;
+  font-size:16px;
+}
+
+.navbar {
+  position:fixed;
+  bottom:0;
+  width:100%;
+  height:60px;
+  display:flex;
+  background:#000;
+}
+.navbar button {
+  flex:1;
+  border-radius:0;
+}
+</style>
+</head>
+
+<body>
+
+<div id="main" class="screen active">
+  <h1>🏌️ Golf</h1>
+  <div class="card" onclick="openCategory('oppvarming')">Oppvarming</div>
+  <div class="card" onclick="openCategory('range')">Range</div>
+  <div class="card" onclick="openCategory('chipping')">Chipping</div>
+  <div class="card" onclick="openCategory('bunker')">Bunker</div>
+  <div class="card" onclick="openCategory('putting')">Putting</div>
+</div>
+
+<div id="category" class="screen"></div>
+<div id="exercise" class="screen"></div>
+
+<div class="navbar">
+  <button onclick="goBack()">← Tilbake</button>
+  <button onclick="goMenu()">Meny</button>
+  <button onclick="goNext()">Neste →</button>
+</div>
+
+<script>
+
+const data = {
+
+// ✅ OPPVARMING
+oppvarming: [
+{navn:"Bekkentilt", tid:"Tid: 2 min", fokus:["Beveg bekken frem/tilbake","Stabil overkropp"], bilde:"Bilder/bekkentilt.jpg"},
+{navn:"Sidebøy rygg", tid:"Tid: 2 min", fokus:["Bøy side til side","Unngå rotasjon"], bilde:"Bilder/sideboy.jpg"},
+{navn:"Hofte/rygg separasjon", tid:"Tid: 2 min", fokus:["Roter motsatt vei","Øk mobilitet"], bilde:"Bilder/hofte.jpg"},
+{navn:"Skulderrotasjon", tid:"Tid: 2 min", fokus:["Rolig rotasjon","Stabil kjerne"], bilde:"Bilder/skulder.jpg"},
+{navn:"Rotasjon mot pinne", tid:"Tid: 2 min", fokus:["Hold vinkler stabile","Kontrollert rotasjon"], bilde:"Bilder/rotasjon.jpg"},
+{navn:"Utoverrotasjon skulder", tid:"Tid: 2 min", fokus:["Aktiver bakside skulder","Kontrollert bevegelse"], bilde:"Bilder/utover.jpg"},
+{navn:"Helikopter", tid:"Tid: 2 min", fokus:["Dynamisk rotasjon","Aktiver overkropp"], bilde:"Bilder/helikopter.jpg"}
+],
+
+// ✅ RANGE
+range: [
+{navn:"Grep", tid:"Tid: 1 min", fokus:["Riktig grep","Stabil base"], video:"https://ovelsesbank.golfforbundet.no/ovelser/alle-ovelser/hvordan-ta-grepet", bilde:"Bilder/grep.jpg"},
+{navn:"Halvsving", tid:"Tid: 3 min", fokus:["Riktig posisjon","God balanse"], video:"https://ovelsesbank.golfforbundet.no/ovelser/alle-ovelser/halvsving-l-til-l.-y-til-l", bilde:"Bilder/halvsving.jpg"},
+{navn:"Tau", tid:"Tid: 3 min", fokus:["Riktig tempo","God sekvens"], video:"https://ovelsesbank.golfforbundet.no/ovelser/alle-ovelser/sving-tauet", bilde:"Bilder/tau.jpg"},
+{navn:"Fleetwood - paraplyfinish", tid:"Tid: 2 min", fokus:["Stabil finish","God balanse"], video:"https://ovelsesbank.golfforbundet.no/ovelser/alle-ovelser/fleetwood-paraplyfinish", bilde:"Bilder/finish.jpg"},
+{navn:"Svinge på en fot", tid:"Tid: 5 min", fokus:["Bedre balanse","Svingretning"], bilde:"Bilder/enfot.jpg"},
+{navn:"Take-away med bøtte / ballong", tid:"Tid: 10 min", fokus:["Riktig start","Rett køllebane"], bilde:"Bilder/takeaway.jpg"},
+{navn:"Pegg mot pinne i baksving", tid:"Tid: 10 min", fokus:["Riktig baksving","God topp-posisjon"], bilde:"Bilder/baksving.jpg"},
+{navn:"Sving over håndkle", tid:"Tid: 15 min", fokus:["Treff ball først","Riktig lavpunkt"], video:"https://ovelsesbank.golfforbundet.no/ovelser/alle-ovelser/sving-over-handduken", bilde:"Bilder/handkle.jpg"},
+{navn:"Planken - svingspor", tid:"Tid: 10 min", fokus:["Riktig spor","Stabil køllebane"], video:"https://ovelsesbank.golfforbundet.no/ovelser/alle-ovelser/planken-lange-slag-med-svingspor", bilde:"Bilder/planke.jpg"},
+{navn:"Sving over pegg", tid:"Tid: 10 min", fokus:["Kontroll på køllebane","Presist treff"], video:"https://ovelsesbank.golfforbundet.no/ovelser/alle-ovelser/sving-over-peggen", bilde:"Bilder/pegg.jpg"}
+],
+
+// ✅ CHIPPING
+chipping: [
+{navn:"Chip/pitch med rangebøtte", tid:"Tid: 5 min", fokus:["Treff landingspunkt","Kontroller lengde"], video:"https://ovelsesbank.golfforbundet.no/ovelser/alle-ovelser/chip-pitch-med-rangebotte", bilde:"Bilder/rangebøtte.jpg"},
+{navn:"Chippe med åpent blad", tid:"Tid: 5 min", fokus:["Åpent blad","Myk landing"], video:"https://ovelsesbank.golfforbundet.no/ovelser/alle-ovelser/chippe-med-apent-blad", bilde:"Bilder/apent.jpg"},
+{navn:"Planken - Chipping", tid:"Tid: 5 min", fokus:["Rett svingspor","Stabil kølle"], video:"https://ovelsesbank.golfforbundet.no/ovelser/alle-ovelser/planken-chipping", bilde:"Bilder/planke_chip.jpg"},
+{navn:"Chippe crosshanded", tid:"Tid: 5 min", fokus:["Rolige hender","Stabil stroke"], video:"https://ovelsesbank.golfforbundet.no/ovelser/alle-ovelser/chippe-crosshanded", bilde:"Bilder/cross.jpg"},
+{navn:"Puttechippen", tid:"Tid: 5 min", fokus:["Enkel bevegelse","Minimal håndledd"], video:"https://ovelsesbank.golfforbundet.no/ovelser/alle-ovelser/puttechippen", bilde:"Bilder/puttechip.jpg"},
+{navn:"Chippeløype - ABC", tid:"Tid: 15 min", fokus:["Treff soner","Spill realistisk","A: 3 på rad fra samme sted","B: Bytt sted hver gang","C: Up & Down fra ulike steder"], video:"https://ovelsesbank.golfforbundet.no/ovelser/alle-ovelser/chippeloype-block-random-practice", bilde:"Bilder/abc.jpg"}
+],
+
+// ✅ BUNKER
+bunker: [
+{navn:"Streken - Bunker", tid:"Tid: 15 min", fokus:["Treff sanden samme sted","Konsistent kontakt"], video:"https://ovelsesbank.golfforbundet.no/ovelser/alle-ovelser/streken", bilde:"Bilder/streken.jpg"},
+{navn:"iPhone drill", tid:"Tid: 20 min", fokus:["Stabil kropp","Kontrollert køllebane"], video:"https://ovelsesbank.golfforbundet.no/ovelser/alle-ovelser/iphone-mobilen", bilde:"Bilder/iphone.jpg"}
+],
+
+// ✅ PUTTING
+putting: [
+{navn:"Pegg til pegg", tid:"Tid: 10 min", fokus:["Kontroller tempo","Treff riktig linje"], video:"https://ovelsesbank.golfforbundet.no/ovelser/alle-ovelser/pegg-til-pegg", bilde:"Bilder/pegg_putting.jpg"},
+{navn:"Sko Leken", tid:"Tid: 30 min", fokus:["Stabil stroke","Presisjon på kort hold","2 treff → gå bak","1 treff → samme sted","0 treff → nærmere"], video:"https://ovelsesbank.golfforbundet.no/ovelser/alle-ovelser/foten", bilde:"Bilder/skole.jpg"}
+]
+
+};
+
+let currentList = [];
+let currentIndex = 0;
+let currentScreen = "main";
+
+function openCategory(cat) {
+  currentList = data[cat];
+  currentScreen = "category";
+
+  let html = "<h2>" + cat.toUpperCase() + "</h2>";
+
+  currentList.forEach((e,i)=>{
+    html += '<div class="card" onclick="openExercise(' + i + ')">' + e.navn + '</div>';
+  });
+
+  document.getElementById("category").innerHTML = html;
+  show("category");
+}
+
+function openExercise(i) {
+  currentIndex = i;
+  currentScreen = "exercise";
+  renderExercise();
+}
+
+function renderExercise() {
+  let e = currentList[currentIndex];
+
+  let html = "";
+
+  if (e.bilde) html += '<img src="' + e.bilde + '">';
+
+  html += "<h1>" + e.navn + "</h1>";
+  html += "<h2>" + e.tid + "</h2>";
+  html += "<b>Fokus:</b><ul>";
+
+  e.fokus.forEach(f => {
+    html += "<li>" + f + "</li>";
+  });
+
+  html += "</ul>";
+
+  if (e.video) {
+    html += '<button onclick="window.open(\'' + e.video + '\')">▶ Se video</button>';
+  }
+
+  document.getElementById("exercise").innerHTML = html;
+  show("exercise");
+}
+
+function goBack() {
+  if (currentScreen === "exercise") {
+    if (currentIndex > 0) {
+      currentIndex--;
+      renderExercise();
+    } else {
+      show("category");
+      currentScreen = "category";
+    }
+  } else if (currentScreen === "category") {
+    show("main");
+    currentScreen = "main";
+  }
+}
+
+function goNext() {
+  if (currentScreen === "exercise" && currentIndex < currentList.length - 1) {
+    currentIndex++;
+    renderExercise();
+  }
+}
+
+function goMenu() {
+  show("main");
+  currentScreen = "main";
+}
+
+function show(id) {
+  document.getElementById("main").classList.remove("active");
+  document.getElementById("category").classList.remove("active");
+  document.getElementById("exercise").classList.remove("active");
+
+  document.getElementById(id).classList.add("active");
+}
+
+</script>
+
+</body>
+</html>
