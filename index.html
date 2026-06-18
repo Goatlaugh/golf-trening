@@ -1,0 +1,507 @@
+<!DOCTYPE html>
+<html lang="no">
+<head>
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Golf - Trening</title>
+
+<style>
+body {
+  margin:0;
+  font-family:Arial;
+  background:#0b2d1f;
+  color:white;
+}
+
+.screen {
+  display:none;
+  padding:20px;
+  padding-bottom:80px;
+}
+.active { display:block; }
+
+.card {
+  background:#123f2a;
+  padding:18px;
+  margin:10px 0;
+  border-radius:12px;
+  font-size:20px;
+  cursor:pointer;
+}
+
+img {
+  width:100%;
+  border-radius:12px;
+  margin-bottom:15px;
+}
+
+h2 {
+  margin-top:0;
+}
+
+ul {
+  list-style: none;   /* fjerner bulletpoints */
+  padding-left: 0;
+}
+
+li {
+  margin-bottom: 4px;
+}
+
+li::before {
+  content: "- ";      /* legger til bindestrek */
+}
+
+/* Fjerner "-" fra fremgangsmåte */
+.fremgang li::before {
+  content: "";
+}
+
+.fremgang-linje {
+  margin-bottom: 6px;
+  line-height: 1.4;
+}
+
+.fremgang-linje strong {
+  color: #1fa463;
+  margin-right: 8px;
+  display: inline-block;
+}
+
+.fremgang-linje {
+  margin-bottom: 8px;
+}
+
+
+button {
+  width:100%;
+  padding:15px;
+  margin-top:10px;
+  border:none;
+  border-radius:10px;
+  background:#1fa463;
+  color:white;
+  font-size:16px;
+}
+
+.navbar {
+  position:fixed;
+  bottom:0;
+  width:100%;
+  height:60px;
+  display:flex;
+  background:#000;
+}
+.navbar button {
+  flex:1;
+  border-radius:0;
+}
+</style>
+</head>
+
+<body>
+
+<div id="main" class="screen active">
+  <h1>🏌️ Golf</h1>
+  <div class="card" onclick="openCategory('oppvarming')">Oppvarming</div>
+  <div class="card" onclick="openCategory('range')">Range</div>
+  <div class="card" onclick="openCategory('chipping')">Chipping</div>
+  <div class="card" onclick="openCategory('bunker')">Bunker</div>
+  <div class="card" onclick="openCategory('putting')">Putting</div>
+</div>
+
+<div id="category" class="screen"></div>
+<div id="exercise" class="screen"></div>
+
+<div class="navbar">
+  <button onclick="goBack()">← Tilbake</button>
+  <button onclick="goMenu()">Meny</button>
+  <button onclick="goNext()">Neste →</button>
+</div>
+
+<script>
+
+const data = {
+
+// ✅ OPPVARMING
+oppvarming: [
+{navn:"Bekkentilt", tid:"Tid: 2 min", fokus:["Beveg bekken frem/tilbake","Stabil overkropp"], video:"https://ovelsesbank.golfforbundet.no/ovelser/alle-ovelser/bekkentilt-frem-og-tilbake?redirect=new", bilde:"Bilder/bekkentilt.jpg"},
+
+{navn:"Sidebøy rygg", tid:"Tid: 2 min", fokus:["Bøy side til side","Unngå rotasjon"], video:"https://ovelsesbank.golfforbundet.no/ovelser/alle-ovelser/sideboy?redirect=new", bilde:"Bilder/sideboy.jpg"},
+
+{navn:"Hofte/rygg separasjon", tid:"Tid: 2 min", fokus:["Roter motsatt vei","Øk mobilitet"], video:"https://ovelsesbank.golfforbundet.no/ovelser/alle-ovelser/seperasjon-mellom-hoft-og-rygg-rotasjon?redirect=new", bilde:"Bilder/hofte.jpg"},
+
+{navn:"Skulderrotasjon", tid:"Tid: 2 min", fokus:["Rolig rotasjon","Stabil kjerne"], video:"https://ovelsesbank.golfforbundet.no/ovelser/alle-ovelser/skulderrotasjon-uten-golfkolle?redirect=new", bilde:"Bilder/skulder.jpg"},
+
+{navn:"Rotasjon mot pinne", tid:"Tid: 2 min", fokus:["Hold vinkler stabile","Kontrollert rotasjon"], video:"https://ovelsesbank.golfforbundet.no/ovelser/alle-ovelser/skulderrotasjon-og-tilt-ved-hjelp-av-golfkolle?redirect=new", bilde:"Bilder/rotasjon.jpg"},
+
+{navn:"Utoverrotasjon skulder", tid:"Tid: 2 min", fokus:["Aktiver bakside skulder","Kontrollert bevegelse"], video:"https://ovelsesbank.golfforbundet.no/ovelser/alle-ovelser/skuldermobilitet-utoverrotasjoner?redirect=new", bilde:"Bilder/utover.jpg"},
+
+{navn:"Helikopter", tid:"Tid: 2 min", fokus:["Dynamisk rotasjon","Aktiver overkropp"], video:"https://ovelsesbank.golfforbundet.no/ovelser/alle-ovelser/helikopter?redirect=new", bilde:"Bilder/helikopter.jpg"}
+],
+
+// ✅ RANGE
+range: [
+
+{navn:"Grep", tid:"Tid: 1 min",
+fokus:["Riktig grep","Stabil base"],
+sjekkpunkter:[
+"Ut i fingrene (der hvor bæreposen ligger)",
+"V og V (venstre og høyre hand) mot venstre armhule/skulder",
+"2 til 3 knokler vises på venstre hand",
+"Ingen luft mellom grep og lillefinger"
+],
+video:"https://ovelsesbank.golfforbundet.no/ovelser/alle-ovelser/hvordan-ta-grepet",
+bilde:"Bilder/grep.jpg"
+},
+
+{navn:"Halvsving - L til L og Y til L", tid:"Tid: 3 min",
+fokus:["Riktig posisjon","God balanse"],
+fremgang:[
+"Tren svingen med å starte med små bevegelser og øke svinglengden.",
+"Steg 1: Sving 'Y' til 'Y'",
+"Steg 2: Sving 'L' til 'Y'",
+"Steg 3: 'L' til 'L'"
+],
+video:"https://ovelsesbank.golfforbundet.no/ovelser/alle-ovelser/halvsving-l-til-l.-y-til-l",
+bilde:"Bilder/halvsving.jpg"
+},
+
+{navn:"Sving tauet", tid:"Tid: 3 min",
+fokus:["Riktig tempo","God sekvens"],
+video:"https://ovelsesbank.golfforbundet.no/ovelser/alle-ovelser/sving-tauet",
+bilde:"Bilder/tau.jpg"
+},
+
+{navn:"Fleetwood - paraplyfinish", tid:"Tid: 2 min",
+fokus:["Stabil finish","God balanse"],
+video:"https://ovelsesbank.golfforbundet.no/ovelser/alle-ovelser/fleetwood-paraplyfinish",
+bilde:"Bilder/finish.jpg"
+},
+
+{navn:"Svinge på en fot", tid:"Tid: 5 min",
+fokus:["Bedre balanse","Svingretning"],
+fremgang:[
+"Denne øvelsen passer for de som ønsker å endre svingretningen enten mer mot høyre eller venstre.",
+"Venstre svingretning: Ved å legge ballen bak i oppstillingen tvinger man seg til å tilte mer bakover i ryggsøylen. Denne bevegelsen er som regel utfordrende for en som svinger mye venstre.",
+"Høyre svingretning: Ved å legge ballen bak i oppstillingen tvinger man seg til å tilte mindre bakover i ryggsøylen. Denne bevegelsen er som regel utfordrende for en som svinger mye høyre."
+],
+video:"https://ovelsesbank.golfforbundet.no/ovelser/alle-ovelser/svingretningovelse?redirect=new",
+bilde:"Bilder/enfot.jpg"
+},
+
+{navn:"Take-away med bøtte / ballong", tid:"Tid: 10 min",
+fokus:["Riktig start","Rett køllebane"],
+fremgang:[
+"Plasser bøtta mellom underarmene og utfør en take-away",
+"Dette er med på å skape:",
+"1. Køllebladet holder seg nøytralt",
+"2. Køllebladet er på utsiden av hendene i take-away",
+"3. Kropp og armer koblet sammen"
+],
+video:"https://ovelsesbank.golfforbundet.no/ovelser/alle-ovelser/take-away-med-botte-ballong?redirect=new",
+bilde:"Bilder/takeaway.jpg"
+},
+
+{navn:"Pegg mot pinne i baksving", tid:"Tid: 10 min",
+fokus:["Riktig baksving","God topp-posisjon"],
+video:"https://ovelsesbank.golfforbundet.no/ovelser/alle-ovelser/pegg-mot-pinne-i-baksving?redirect=new",
+bilde:"Bilder/baksving.jpg"
+},
+
+{navn:"Sving over håndkle", tid:"Tid: 15 min",
+fokus:["Treff ball først","Riktig lavpunkt"],
+fremgang:[
+"I denne øvelsen legger utøveren en handduk ca. to køllehoder før ballen",
+"Deretter er oppgaven å slå baller, uten at køllehodet treffer handduken",
+"Utføres dette riktig vil utøveren slå ned på ballen, noe som er en forutsetning for et godt balltreff uten pegg"
+],
+video:"https://ovelsesbank.golfforbundet.no/ovelser/alle-ovelser/sving-over-handduken",
+bilde:"Bilder/handkle.jpg"
+},
+
+{navn:"Planken - svingspor", tid:"Tid: 10 min",
+fokus:["Riktig spor","Stabil køllebane"],
+fremgang:[
+"Sett opp en siktepinne som indikerer siktet",
+"Sett deretter opp en 'planke' enten i retning venstre eller høyre for mål som krever at man enten svinger 'innenfra og ut' eller 'utenfra og inn'",
+"Plasser køllebladet ved ballen og legg planken ca. 1-2cm på utsiden av køllebladet",
+"Oppgaven er enkel: Slå ballen uten å treffe 'planken'"
+],
+video:"https://ovelsesbank.golfforbundet.no/ovelser/alle-ovelser/planken-lange-slag-med-svingspor",
+bilde:"Bilder/planke.jpg"
+},
+
+{navn:"Sving over pegg", tid:"Tid: 10 min",
+fokus:["Kontroll på køllebane","Presist treff"],
+fremgang:[
+"Å slå opp på ballen med driver kan legge til rette for å optimalisere lengden med driver (i kombinasjon med dynamisk loft og balltreff)",
+"Sett en pegg 4-5cm etter ballen, hvor intensjonen skal være å slå ballen, samtidig som køllen svinger over peggen"
+],
+video:"https://ovelsesbank.golfforbundet.no/ovelser/alle-ovelser/sving-over-peggen",
+bilde:"Bilder/pegg.jpg"
+}
+
+],
+
+// ✅ CHIPPING
+chipping: [
+
+{navn:"Chip/pitch med rangebøtte", tid:"Tid: 5 min",
+fokus:["Treff landingspunkt","Kontroller lengde"],
+fremgang:[
+"En øvelse for å koble hender og kropp sammen i chip/pitch-slaget",
+"Plasser en rangebøtte/ballong mellom underarmene og slå chipper samtidig som bøtten holder seg mellom underarmene"
+],
+video:"https://ovelsesbank.golfforbundet.no/ovelser/alle-ovelser/chip-pitch-med-rangebotte",
+bilde:"Bilder/rangebøtte.jpg"
+},
+
+{navn:"Chippe med åpent blad", tid:"Tid: 5 min",
+fokus:["Åpent blad","Myk landing"],
+fremgang:[
+"Et åpent blad skaper mer effektiv bounce/såle på køllen",
+"Denne er til hjelp da den hindrer køllen og grave seg ned hvis man duffer",
+"Tre referanser å se etter:",
+"1. Skaftvinkel fremover",
+"2. Åpent blad i oppstillingen",
+"3. Åpent blad i baksvingen (køllen peker rett opp)"
+],
+video:"https://ovelsesbank.golfforbundet.no/ovelser/alle-ovelser/chippe-med-apent-blad",
+bilde:"Bilder/apent.jpg"
+},
+
+{navn:"Planken - Chipping", tid:"Tid: 5 min",
+fokus:["Rett svingspor","Stabil kølle"],
+fremgang:[
+"Det som kjennetegner en god chippeteknikk er at svingen går i relativt rett linje (skapes gjennom et bratt svingplan)",
+"Plasser en pappeske/planke slik at den sikter i riktig retning",
+"Denne øvelsen sikrer at svingen går relativt rett, i motsetning til en sving med mye bue",
+"Den sikrer også sikte og et nøytralt svingspor",
+"NB: Det kan være lurt å benytte noe som ikke oppleves skummelt å treffe",
+"Derfor er pappeske ofte foretrukket over en planke"
+],
+video:"https://ovelsesbank.golfforbundet.no/ovelser/alle-ovelser/planken-chipping",
+bilde:"Bilder/planke_chip.jpg"
+},
+
+{navn:"Chippe crosshanded", tid:"Tid: 5 min",
+fokus:["Rolige hender","Stabil stroke"],
+fremgang:[
+"Denne øvelsen kan benyttes på to ulike måter",
+"1. GOBBS-øvelse: Ta et crosshanded grep (bytt posisjon på hendene) og kjenn hvordan oppstillingen forandrer seg",
+"Deretter skal du ta et normalt grep, men prøve å bevare samme oppstilling",
+"Dette er en kanon øvelse for utøvere som har stor høyretilt i ryggsøylen (høyre skulder veldig lav)",
+"2. Teknikkøvelse: Hvorfor ikke teste å slå crosshanded? Matt Fitzpatrick fra PGA-touren sverger til dette!"
+],
+video:"https://ovelsesbank.golfforbundet.no/ovelser/alle-ovelser/chippe-crosshanded",
+bilde:"Bilder/cross.jpg"
+},
+
+{navn:"Puttechippen", tid:"Tid: 5 min",
+fokus:["Enkel bevegelse","Minimal håndledd"],
+fremgang:[
+"Å stå og slå som man putter i chipping kan være en god måte å løse det på",
+"Tettere på ballen",
+"Skaftet mer oppreist (upright). Det kan være hensiktsmessig å ta et puttegrep og noe lengre ned på grepet (MÅ ikke)",
+"Ballposisjonen under eller før ballen",
+"Dette gir gode forutsetninger for stabilitet i både retning og balltreff"
+],
+video:"https://ovelsesbank.golfforbundet.no/ovelser/alle-ovelser/puttechippen",
+bilde:"Bilder/puttechip.jpg"
+},
+
+{navn:"Chippeløype - ABC", tid:"Tid: 15 min",
+fokus:["Treff soner","Spill realistisk"],
+fremgang:[
+"Øvelsen er delt opp i tre steg. Når man klarer et steg går man videre",
+"Steg A: Tre på rad inn i valgt sone fra samme sted. Ballen kan plasseres fint i gresset",
+"Steg B: Tre på rad inn i sone, men man slår aldri to baller fra samme sted. Bytt for hvert slag (uavhengig om man treffer eller ikke)",
+"Steg C: Tre 'up and down' fra ulike steder. Ruller utslagssted, uavhengig om man klarer 'up and down'",
+"Fullfører du ABC går du til neste nivå som gir mindre radius på sirklene"
+],
+video:"https://ovelsesbank.golfforbundet.no/ovelser/alle-ovelser/chippeloype-block-random-practice",
+bilde:"Bilder/abc.jpg"
+}
+
+],
+
+// ✅ BUNKER
+bunker: [
+
+{navn:"Streken - Bunker", tid:"Tid: 15 min",
+fokus:["Treff sanden samme sted","Konsistent kontakt"],
+fremgang:[
+"Lag en strek i sanden hvor man ønsker å treffe sanden",
+"Hensikten med øvelsen er å treffe sanden akkurat der streken er",
+"Ved å trene på å treffe streken vil utøverne bli bedre på å treffe riktig sted og ta riktig mengde sand når de slår bunkerslag",
+"Tips til differensiering/variasjon i øvelsen:",
+"Legg ballen ca. 5 cm etter streken – Fortsett å slå streken",
+"Denne øvelsen kan bygges inn som første steg til Iphone",
+"Kan brukes til å trene lange slag. Streken gir et klart svar på hvor i sanden køllen treffer"
+],
+video:"https://ovelsesbank.golfforbundet.no/ovelser/alle-ovelser/streken",
+bilde:"Bilder/streken.jpg"
+},
+
+{navn:"iPhone drill", tid:"Tid: 20 min",
+fokus:["Stabil kropp","Kontrollert køllebane"],
+fremgang:[
+"Tegn en firkant med størrelse av en IPhone i sanden",
+"Steg 1: Her skal utøverne prøve å slå bort sanden inne i iPhone. Inngangen i sanden skal være der Iphone starter",
+"Steg 2: Legg en golfball midt inni Iphone gjør akkurat samme som i steg en og opplev at ballen flyr ut av bunkeren"
+],
+video:"https://ovelsesbank.golfforbundet.no/ovelser/alle-ovelser/iphone-mobilen",
+bilde:"Bilder/iphone.jpg"
+}
+
+],
+
+// ✅ PUTTING
+putting: [
+
+{navn:"Pegg til pegg", tid:"Tid: 10 min",
+fokus:["Kontroller tempo","Treff riktig linje"],
+fremgang:[
+"Hensikten med øvelsen er å skape en god rytme i puttebevegelsen",
+"Å ha like lang baksving som nedsving er på ingen måte en fasit i golf, men kan være en god start for en nybegynner",
+"I øvelsen skal baksvingen og nedsvingen gå til samme peggfarge slik illustrasjonen viser",
+"Dette er en fin øvelse for golferen som 'hugger' på ballen når de putter"
+],
+video:"https://ovelsesbank.golfforbundet.no/ovelser/alle-ovelser/pegg-til-pegg",
+bilde:"Bilder/pegg_putting.jpg"
+},
+
+{navn:"Sko Leken", tid:"Tid: 30 min",
+fokus:["Stabil stroke","Presisjon på kort hold"],
+fremgang:[
+"Starter en fot fra hullet og markerer området med en pegg.",
+"En må sette to putter.",
+"Klarer en det så beveger en seg en fot lengre vekk fra hullet",
+"Regel:",
+"2 treff → gå bak en fot",
+"1 treff → samme sted",
+"0 treff → nærmere med en fot"
+],
+video:"https://ovelsesbank.golfforbundet.no/ovelser/alle-ovelser/foten",
+bilde:"Bilder/skole.jpg"
+}
+
+],
+
+};
+
+let currentList = [];
+let currentIndex = 0;
+let currentScreen = "main";
+
+function openCategory(cat) {
+  currentList = data[cat];
+  currentScreen = "category";
+
+  let html = "<h2>" + cat.toUpperCase() + "</h2>";
+
+  currentList.forEach((e,i)=>{
+    html += '<div class="card" onclick="openExercise(' + i + ')">' + e.navn + '</div>';
+  });
+
+  document.getElementById("category").innerHTML = html;
+  show("category");
+}
+
+function openExercise(i) {
+  currentIndex = i;
+  currentScreen = "exercise";
+  renderExercise();
+}
+
+function renderExercise() {
+  let e = currentList[currentIndex];
+
+  let html = "";
+
+  if (e.bilde) html += '<img src="' + e.bilde + '">';
+
+  html += "<h1>" + e.navn + "</h1>";
+  html += "<h2>" + e.tid + "</h2>";
+  html += "<b>Fokus:</b><ul>";
+e.fokus.forEach(f => {  
+  html += "<li>" + f + "</li>";
+});
+html += "</ul>";
+
+if (e.sjekkpunkter) {
+  html += "<b>Sjekkpunkter:</b><ul>";
+  e.sjekkpunkter.forEach(s => {
+    html += "<li>" + s + "</li>";
+  });
+  html += "</ul>";
+}
+
+if (e.fremgang) {
+  html += "<b>Fremgangsmåte:</b>";
+
+  e.fremgang.forEach(f => {
+
+    if (f.startsWith("Steg")) {
+
+  let deler = f.split(":");
+  let steg = deler[0] + ":";
+  let tekst = deler.slice(1).join(":");
+
+  html += "<div class='fremgang-linje'><strong>" + steg + "</strong>" + tekst + "</div>";
+
+} else {
+  html += "<div class='fremgang-linje'>" + f + "</div>";
+}
+
+  });
+}
+``
+
+  if (e.video) {
+    html += '<button onclick="window.open(\'' + e.video + '\')">▶ Se video</button>';
+  }
+
+  document.getElementById("exercise").innerHTML = html;
+  show("exercise");
+}
+
+function goBack() {
+  if (currentScreen === "exercise") {
+    if (currentIndex > 0) {
+      currentIndex--;
+      renderExercise();
+    } else {
+      show("category");
+      currentScreen = "category";
+    }
+  } else if (currentScreen === "category") {
+    show("main");
+    currentScreen = "main";
+  }
+}
+
+function goNext() {
+  if (currentScreen === "exercise" && currentIndex < currentList.length - 1) {
+    currentIndex++;
+    renderExercise();
+  }
+}
+
+function goMenu() {
+  show("main");
+  currentScreen = "main";
+}
+
+function show(id) {
+  document.getElementById("main").classList.remove("active");
+  document.getElementById("category").classList.remove("active");
+  document.getElementById("exercise").classList.remove("active");
+
+  document.getElementById(id).classList.add("active");
+}
+
+</script>
+
+</body>
+</html>
