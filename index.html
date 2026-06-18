@@ -86,39 +86,61 @@ li::before {
 }
 
 .hero {
-  background: linear-gradient(rgba(0,0,0,0.4), rgba(11,45,31,0.95)),
-              url('Icon.png');
-  background-size: cover;
-  background-position: center;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+
+  gap: 20px;
+  padding: 20px;
+
   border-radius: 20px;
-  padding: 30px 20px;
   margin-bottom: 25px;
+
+  background: linear-gradient(145deg, #123f2a, #0e3323);
   box-shadow: 0 10px 25px rgba(0,0,0,0.4);
 
-position: relative;
   overflow: hidden;
 }
 
-.hero::after {
-  content: "";
-  position: absolute;
-  top: 0;
-  left: -50%;
-  width: 200%;
-  height: 100%;
-  background: linear-gradient(
-    120deg,
-    transparent,
-    rgba(255,255,255,0.08),
-    transparent
-  );
-  transform: skewX(-20deg);
+/* Venstre side (tekst) */
+.hero-left {
+  flex: 1;
 }
 
-.hero-content {
-  display: flex;
-  flex-direction: column;
+/* Tittel */
+.app-title {
+  font-size: 28px;
+  font-weight: 700;
+  line-height: 1.2;
 }
+
+/* Brand */
+.brand {
+  font-size: 13px;
+  letter-spacing: 2px;
+  color: rgba(255,255,255,0.7);
+}
+
+/* Bilde */
+.hero-img {
+  width: 150px;
+  height: auto;
+  border-radius: 12px;
+
+  object-fit: contain;
+  display: block;
+
+  filter: drop-shadow(0 10px 15px rgba(0,0,0,0.5));
+}
+
+.hero-img {
+  transition: transform 0.2s ease;
+}
+
+.hero:hover .hero-img {
+  transform: scale(1.05);
+}
+
 
 .brand {
   font-size: 13px;
@@ -130,8 +152,29 @@ position: relative;
   font-size: 30px;
   font-weight: 700;
   line-height: 1.2;
+  text-shadow: 0 3px 10px rgba(0,0,0,0.6);
 }
 
+.brand {
+  font-size: 13px;
+  letter-spacing: 2px;
+  color: rgba(255,255,255,0.8);
+  text-shadow: 0 2px 6px rgba(0,0,0,0.5);
+}
+
+@media (max-width: 500px) {
+  .hero {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 10px;
+  }
+
+  .hero-img {
+    width: 100%;
+    max-width: 220px;
+    align-self: center;
+  }
+}
 
 
 ``
@@ -224,11 +267,15 @@ button {
 <div id="main" class="screen active">
 
 <div class="hero">
-  <div class="hero-content">
+  <div class="hero-left">
     <div class="brand">BG</div>
-<div class="app-title">Golf - Trening</div>
+    <div class="app-title">Golf - Trening</div>
   </div>
+
+  <img src="Icon.png" class="hero-img">
 </div>
+
+
 
   <div class="card" onclick="openCategory('oppvarming')">🔥 Oppvarming</div>
   <div class="card" onclick="openCategory('range')">🏌️ Range</div>
