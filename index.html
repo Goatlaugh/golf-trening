@@ -9,7 +9,7 @@
 <meta name="apple-mobile-web-app-capable" content="yes">
 <meta name="apple-mobile-web-app-status-bar-style" content="black">
 <meta name="theme-color" content="#0b2d1f">
-  
+
 <style>
 body {
   margin:0;
@@ -26,12 +26,20 @@ body {
 .active { display:block; }
 
 .card {
-  background:#123f2a;
+  background: linear-gradient(145deg, #123f2a, #0e3323);
   padding:18px;
-  margin:10px 0;
-  border-radius:12px;
+  margin:12px 0;
+  border-radius:16px;
   font-size:20px;
   cursor:pointer;
+  box-shadow: 0 6px 12px rgba(0,0,0,0.3);
+  transition: all 0.2s ease;
+  border: 1px solid rgba(255,255,255,0.05);
+}
+
+.card:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 12px 20px rgba(0,0,0,0.45);
 }
 
 img {
@@ -77,6 +85,106 @@ li::before {
   margin-bottom: 8px;
 }
 
+.hero {
+  background: linear-gradient(rgba(0,0,0,0.4), rgba(11,45,31,0.95)),
+              url('Icon.png');
+  background-size: cover;
+  background-position: center;
+  border-radius: 20px;
+  padding: 30px 20px;
+  margin-bottom: 25px;
+  box-shadow: 0 10px 25px rgba(0,0,0,0.4);
+
+position: relative;
+  overflow: hidden;
+}
+
+.hero::after {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: -50%;
+  width: 200%;
+  height: 100%;
+  background: linear-gradient(
+    120deg,
+    transparent,
+    rgba(255,255,255,0.08),
+    transparent
+  );
+  transform: skewX(-20deg);
+}
+
+.hero-content {
+  display: flex;
+  flex-direction: column;
+}
+
+.brand {
+  font-size: 13px;
+  letter-spacing: 2px;
+  color: rgba(255,255,255,0.7);
+}
+
+.app-title {
+  font-size: 30px;
+  font-weight: 700;
+  line-height: 1.2;
+}
+
+
+
+``
+
+.card {
+  background: linear-gradient(145deg, #123f2a, #0e3323);
+  padding:18px;
+  margin:12px 0;
+  border-radius:16px;
+  font-size:20px;
+  cursor:pointer;
+  box-shadow: 0 6px 12px rgba(0,0,0,0.3);
+  transition: transform 0.15s ease, box-shadow 0.15s ease;
+}
+
+.card:hover {
+  transform: translateY(-3px);
+  box-shadow: 0 10px 18px rgba(0,0,0,0.45);
+}
+
+.card {
+  display:flex;
+  align-items:center;
+  gap:10px;
+}
+
+.card:active {
+  transform: scale(0.98);
+}
+
+h1 {
+  font-size:26px;
+}
+
+h2 {
+  color:#1fa463;
+}
+
+b {
+  display:block;
+  margin-top:10px;
+  margin-bottom:5px;
+  color:#1fa463;
+}
+
+.screen {
+  padding:20px;
+  padding-bottom:80px;
+  max-width: 600px;
+  margin: auto;
+}
+``
+
 
 button {
   width:100%;
@@ -84,7 +192,7 @@ button {
   margin-top:10px;
   border:none;
   border-radius:10px;
-  background:#1fa463;
+  background:linear-gradient(145deg, #1fa463, #178a52);
   color:white;
   font-size:16px;
 }
@@ -93,28 +201,42 @@ button {
   position:fixed;
   bottom:0;
   width:100%;
-  height:60px;
+  height:65px;
   display:flex;
-  background:#000;
+  background:rgba(0,0,0,0.85);
+  backdrop-filter: blur(10px);
+  border-top:1px solid rgba(255,255,255,0.1);
 }
+
 .navbar button {
   flex:1;
   border-radius:0;
+  background:none;
+  color:white;
+  font-size:14px;
 }
+``
 </style>
 </head>
 
 <body>
 
 <div id="main" class="screen active">
-  <h1>🏌️ Golf</h1>
-  <div class="card" onclick="openCategory('oppvarming')">Oppvarming</div>
-  <div class="card" onclick="openCategory('range')">Range</div>
-  <div class="card" onclick="openCategory('chipping')">Chipping</div>
-  <div class="card" onclick="openCategory('bunker')">Bunker</div>
-  <div class="card" onclick="openCategory('putting')">Putting</div>
+
+<div class="hero">
+  <div class="hero-content">
+    <div class="brand">BG</div>
+<div class="app-title">Golf - Trening</div>
+  </div>
 </div>
 
+  <div class="card" onclick="openCategory('oppvarming')">🔥 Oppvarming</div>
+  <div class="card" onclick="openCategory('range')">🏌️ Range</div>
+  <div class="card" onclick="openCategory('chipping')">🎯 Chipping</div>
+  <div class="card" onclick="openCategory('bunker')">🏖️ Bunker</div>
+  <div class="card" onclick="openCategory('putting')">⛳ Putting</div>
+</div>
+``
 <div id="category" class="screen"></div>
 <div id="exercise" class="screen"></div>
 
