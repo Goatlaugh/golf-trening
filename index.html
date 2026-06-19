@@ -22,25 +22,12 @@ body {
   display:none;
   padding:20px;
   padding-bottom:80px;
+  max-width: 600px;
+  margin: auto;
 }
+
 .active { display:block; }
 
-.card {
-  background: linear-gradient(145deg, #123f2a, #0e3323);
-  padding:18px;
-  margin:12px 0;
-  border-radius:16px;
-  font-size:20px;
-  cursor:pointer;
-  box-shadow: 0 6px 12px rgba(0,0,0,0.3);
-  transition: all 0.2s ease;
-  border: 1px solid rgba(255,255,255,0.05);
-}
-
-.card:hover {
-  transform: translateY(-4px);
-  box-shadow: 0 12px 20px rgba(0,0,0,0.45);
-}
 
 img {
   width:100%;
@@ -85,57 +72,7 @@ li::before {
   margin-bottom: 8px;
 }
 
-.hero {
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
 
-  gap: 20px;
-  padding: 20px;
-
-  border-radius: 20px;
-  margin-bottom: 25px;
-
-  background: linear-gradient(145deg, #123f2a, #0e3323);
-  box-shadow: 0 10px 25px rgba(0,0,0,0.4);
-
-  overflow: hidden;
-}
-
-/* Venstre side (tekst) */
-.hero-left {
-  flex: 1;
-}
-
-/* Tittel */
-.app-title {
-  font-size: 28px;
-  font-weight: 700;
-  line-height: 1.2;
-}
-
-/* Brand */
-.brand {
-  font-size: 13px;
-  letter-spacing: 2px;
-  color: rgba(255,255,255,0.7);
-}
-
-/* Bilde */
-.hero-img {
-  width: 150px;
-  height: auto;
-  border-radius: 12px;
-
-  object-fit: contain;
-  display: block;
-
-  filter: drop-shadow(0 10px 15px rgba(0,0,0,0.5));
-}
-
-.hero-img {
-  transition: transform 0.2s ease;
-}
 
 .hero:hover .hero-img {
   transform: scale(1.05);
@@ -177,33 +114,63 @@ li::before {
 }
 
 
-``
 
 .card {
-  background: linear-gradient(145deg, #123f2a, #0e3323);
-  padding:18px;
-  margin:12px 0;
-  border-radius:16px;
-  font-size:20px;
-  cursor:pointer;
-  box-shadow: 0 6px 12px rgba(0,0,0,0.3);
-  transition: transform 0.15s ease, box-shadow 0.15s ease;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+
+  padding: 18px 20px;
+  margin: 14px 0;
+
+  border-radius: 20px;
+
+  /* Litt bedre farge */
+  background: linear-gradient(145deg, #12422c, #0e3323);
+
+  /* Outline som i designet ditt */
+  border: 1px solid rgba(150, 255, 120, 0.2);
+
+  /* Mer dybde */
+  box-shadow: 0 8px 20px rgba(0,0,0,0.45);
+
+  font-size: 18px;
+  cursor: pointer;
+
+  transition: all 0.2s ease;
 }
+
+
+
 
 .card:hover {
   transform: translateY(-3px);
-  box-shadow: 0 10px 18px rgba(0,0,0,0.45);
+  box-shadow: 0 12px 25px rgba(0,0,0,0.6);
 }
 
-.card {
-  display:flex;
-  align-items:center;
-  gap:10px;
+.card:hover .arrow {
+  transform: translateX(5px);
+  opacity: 1;
 }
 
 .card:active {
-  transform: scale(0.98);
+  transform: scale(0.97);
 }
+
+
+.card .left {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+
+.card .arrow {
+  font-size: 24px;
+  opacity: 0.6;
+  transition: all 0.2s ease;
+}
+
 
 h1 {
   font-size:26px;
@@ -220,13 +187,7 @@ b {
   color:#1fa463;
 }
 
-.screen {
-  padding:20px;
-  padding-bottom:80px;
-  max-width: 600px;
-  margin: auto;
-}
-``
+
 
 
 button {
@@ -258,7 +219,31 @@ button {
   color:white;
   font-size:14px;
 }
-``
+
+
+/* HERO BILDE */
+.hero-image {
+  text-align: center;
+margin-top: -20px;   /* trekker bildet litt opp */
+  margin-bottom: -100px;
+ position: relative;
+  z-index: 1;
+pointer-events: none;
+
+}
+
+.hero-image img {
+  width: 100%;
+  max-width: 350px;
+  height: auto;
+
+  /* gir samme “fade” effekt som bildet ditt */
+  mask-image: linear-gradient(to bottom, black 70%, transparent);
+  -webkit-mask-image: linear-gradient(to bottom, black 70%, transparent);
+}
+
+
+
 </style>
 </head>
 
@@ -266,24 +251,40 @@ button {
 
 <div id="main" class="screen active">
 
-<div class="hero">
-  <div class="hero-left">
-    <div class="brand">BG</div>
-    <div class="app-title">Golf - Trening</div>
-  </div>
 
-  <img src="Icon.png" class="hero-img">
+<div class="hero-image">
+  <img src="Fremside Bilde.png">
 </div>
 
 
 
-  <div class="card" onclick="openCategory('oppvarming')">🔥 Oppvarming</div>
-  <div class="card" onclick="openCategory('range')">🏌️ Range</div>
-  <div class="card" onclick="openCategory('chipping')">🎯 Chipping</div>
-  <div class="card" onclick="openCategory('bunker')">🏖️ Bunker</div>
-  <div class="card" onclick="openCategory('putting')">⛳ Putting</div>
+<div class="card" onclick="openCategory('oppvarming')">
+  <span class="left">🔥 Oppvarming</span>
+  <span class="arrow">›</span>
 </div>
-``
+
+<div class="card" onclick="openCategory('range')">
+  <span class="left">🏌️ Range</span>
+  <span class="arrow">›</span>
+</div>
+
+<div class="card" onclick="openCategory('chipping')">
+  <span class="left">🎯 Chipping</span>
+  <span class="arrow">›</span>
+</div>
+
+<div class="card" onclick="openCategory('bunker')">
+  <span class="left">🏖️ Bunker</span>
+  <span class="arrow">›</span>
+</div>
+
+<div class="card" onclick="openCategory('putting')">
+  <span class="left">⛳ Putting</span>
+  <span class="arrow">›</span>
+</div>
+
+</div>
+
 <div id="category" class="screen"></div>
 <div id="exercise" class="screen"></div>
 
@@ -576,7 +577,11 @@ function openCategory(cat) {
   let html = "<h2>" + cat.toUpperCase() + "</h2>";
 
   currentList.forEach((e,i)=>{
-    html += '<div class="card" onclick="openExercise(' + i + ')">' + e.navn + '</div>';
+   html += '<div class="card" onclick="openExercise(' + i + ')">' +
+          '<span class="left">' + e.navn + '</span>' +
+          '<span class="arrow">›</span>' +
+        '</div>';
+
   });
 
   document.getElementById("category").innerHTML = html;
@@ -631,7 +636,7 @@ if (e.fremgang) {
 
   });
 }
-``
+
 
   if (e.video) {
     html += '<button onclick="window.open(\'' + e.video + '\')">▶ Se video</button>';
