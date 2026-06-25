@@ -10,6 +10,7 @@
 <meta name="apple-mobile-web-app-status-bar-style" content="black">
 <meta name="theme-color" content="#0b2d1f">
 
+
 <style>
 body {
   margin:0;
@@ -589,6 +590,7 @@ function openCategory(cat) {
 }
 
 function openExercise(i) {
+keepScreenOn();
   currentIndex = i;
   currentScreen = "exercise";
   renderExercise();
@@ -680,6 +682,44 @@ function show(id) {
 
   document.getElementById(id).classList.add("active");
 }
+
+
+let wakeLock = null;
+
+async function keepScreenOn() {
+  try {
+    wakeLock = await navigator.wakeLock.request('screen');
+    console.log('✅ Skjerm holdes våken');
+
+    wakeLock.addEventListener('release', () => {
+      console.log('❌ Wake Lock ble deaktivert');
+    });
+  } catch (err) {
+    console.log('Feil:', err);
+  }
+}
+
+// Aktiver når siden lastes
+document.addEventListener("DOMContentLoaded", keepScreenOn);
+
+// Re-aktiver hvis bruker går tilbake til siden
+document.addEventListener("visibilitychange", () => {
+  if (wakeLock !== null && document.visibilityState === "visible") {
+    keepScreenOn();
+  }
+});
+
+// Fallback for iOS
+function preventSleepiOS() {
+  setInterval(() => {
+    // Liten usynlig scroll som holder skjermen aktiv
+    window.scrollBy(0, 1);
+    window.scrollBy(0, -1);
+  }, 20000); // hvert 20. sekund
+}
+
+preventSleepiOS();
+
 
 </script>
 
