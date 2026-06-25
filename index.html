@@ -594,7 +594,18 @@ keepScreenOn();
   currentIndex = i;
   currentScreen = "exercise";
   renderExercise();
+
+ startWorkoutNotification();
 }
+
+function startWorkoutNotification() {
+  if (Notification.permission === "granted") {
+    new Notification("Start øvelse", {
+      body: currentList[currentIndex].navn + " - " + currentList[currentIndex].tid
+    });
+  }
+}
+
 
 function renderExercise() {
   let e = currentList[currentIndex];
