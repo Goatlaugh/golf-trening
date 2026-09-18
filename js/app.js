@@ -106,7 +106,33 @@ function renderExercise() {
 
   let html = "";
 
-  if (e.bilde) html += '<img src="' + e.bilde + '">';
+  if (e.videoFile) {
+
+  html += `
+    <video
+      autoplay
+      loop
+      muted
+      playsinline
+      preload="metadata"
+      class="exercise-video">
+
+      <source
+        src="${e.videoFile}"
+        type="video/mp4">
+
+    </video>
+ 
+  `;
+
+}
+else if (e.bilde) {
+
+  html += `<img src="${e.bilde}">`;
+
+
+
+}
 
   html += '<div class="progress-bar">' +
           getProgressBar() +
