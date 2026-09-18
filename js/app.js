@@ -88,11 +88,29 @@ function openExercise(i, autoStart = false) {
 
     const exercise = currentList[currentIndex];
 
+
+
 if (exercise.timer) {
+
+  const video = document.getElementById("exerciseVideo");
+
+  if (video) {
+
+   video.addEventListener("canplaythrough", () => {
 
   setTimeout(() => {
     startTimer(exercise.timer);
   }, exercise.autoStartDelay || 3000);
+
+}, { once: true });
+
+  } else {
+
+    setTimeout(() => {
+      startTimer(exercise.timer);
+    }, exercise.autoStartDelay || 3000);
+
+  }
 
 }
 
@@ -110,6 +128,7 @@ function renderExercise() {
 
   html += `
     <video
+      id="exerciseVideo"
       autoplay
       loop
       muted
