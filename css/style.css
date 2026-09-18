@@ -233,6 +233,9 @@ pointer-events: none;
   width: 100%;
   max-width: 350px;
   height: auto;
+  border: none;
+  box-shadow: none;
+  border-radius: 0;
 
   /* gir samme “fade” effekt som bildet ditt */
   mask-image: linear-gradient(to bottom, black 70%, transparent);
