@@ -33,6 +33,24 @@ currentList = category.data;
 
   let html = "<h2>" + cat.toUpperCase() + "</h2>";
 
+if (cat === "oppvarming") {
+
+  const totalSeconds = oppvarming.reduce(
+    (sum, exercise) => sum + (exercise.timer || 0),
+    0
+  );
+
+  const totalMinutes = Math.floor(totalSeconds / 60);
+
+  html += `
+  <button class="start-workout-btn"
+          onclick="startOppvarming()">
+    🔥 Start Oppvarming (${totalMinutes} min)
+  </button>
+`;
+}
+
+
   currentList.forEach((e,i)=>{
    html += '<div class="card" onclick="openExercise(' + i + ')">' +
           '<span class="left">' + e.navn + '</span>' +
@@ -46,6 +64,11 @@ currentList = category.data;
 }
 
 
+function startOppvarming() {
+
+  openExercise(0, true);
+
+}
 
 function openExercise(i, autoStart = false) {
 
@@ -85,7 +108,11 @@ function renderExercise() {
 
   if (e.bilde) html += '<img src="' + e.bilde + '">';
 
-  html += "<h1>" + e.navn + "</h1>";
+  html += '<div class="progress-bar">' +
+          getProgressBar() +
+        '</div>';
+
+html += "<h1>" + e.navn + "</h1>";
   html += "<h2>" + e.tid + "</h2>";
   html += "<b>Fokus:</b><ul>";
 e.fokus.forEach(f => {  
@@ -166,19 +193,11 @@ if (e.timer) {
 
    <div class="timer-controls">
 
-  <button onclick="startTimer(${e.timer})">
-    ▶️ Start
-  </button>
-
-  <button onclick="pauseTimer()">
-    ⏸️ Pause
-  </button>
-
-  <button onclick="resetTimer(${e.timer})">
-    🔄 Reset
-  </button>
-
+  <div id="timerButtons" class="timer-buttons">
+  <button onclick="startTimer(${e.timer})">▶️ Start</button>
+  <button onclick="resetTimer(${e.timer})">🔄 Reset</button>
 </div>
+
   `;
 }
 
@@ -193,9 +212,9 @@ if (e.timer) {
 function goBack() {
   if (currentScreen === "exercise") {
     if (currentIndex > 0) {
-      currentIndex--;
-      renderExercise();
-    } else {
+  openExercise(currentIndex - 1);
+} 
+else {
       show("category");
       currentScreen = "category";
     }
@@ -207,8 +226,7 @@ function goBack() {
 
 function goNext() {
   if (currentScreen === "exercise" && currentIndex < currentList.length - 1) {
-    currentIndex++;
-    renderExercise();
+    openExercise(currentIndex + 1);
   }
 }
 
@@ -240,6 +258,8 @@ totalTime = seconds;
 
     timerRunning = true;
 
+updateTimerButtons(seconds);
+
     timerInterval = setInterval(() => {
 
       remainingTime--;
@@ -252,10 +272,14 @@ totalTime = seconds;
   remainingTime = 0;
 
   clearInterval(timerInterval);
+
   timerRunning = false;
 
-  document.getElementById("timerDisplay").innerHTML =
-    "✅ Ferdig!";
+updateTimerButtons(totalTime);
+
+document.getElementById("timerDisplay").innerHTML =
+  "✅ Ferdig!";
+
 
   const currentExercise = currentList[currentIndex];
 
@@ -284,6 +308,9 @@ function pauseTimer() {
   clearInterval(timerInterval);
 
   timerRunning = false;
+
+  updateTimerButtons(remainingTime);
+
 }
 
 function resetTimer(seconds) {
@@ -294,8 +321,14 @@ function resetTimer(seconds) {
 
   remainingTime = seconds;
 
+totalTime = seconds;
+
   updateTimerDisplay();
+
+  updateTimerButtons(seconds);
+
 }
+
 
 function updateTimerDisplay() {
 
@@ -335,6 +368,53 @@ else {
 }
 
   }
+}
+
+function updateTimerButtons(seconds) {
+
+  let html = "";
+
+  if (timerRunning) {
+
+    html = `
+      <button onclick="pauseTimer()">⏸️ Pause</button>
+      <button onclick="resetTimer(totalTime)">🔄 Reset</button>
+    `;
+
+  } else {
+
+    html = `
+      <button onclick="startTimer(${seconds})">▶️ Start</button>
+      <button onclick="resetTimer(totalTime)">🔄 Reset</button>
+    `;
+
+  }
+
+  document.getElementById("timerButtons").innerHTML = html;
+}
+
+
+function getProgressBar() {
+
+  let total = currentList.length;
+  let current = currentIndex + 1;
+
+  let percentage = Math.round((current / total) * 100);
+
+  return `
+    <div class="progress-title">Progress</div>
+
+    <div class="progress-track">
+      <div
+        class="progress-fill"
+        style="width:${percentage}%"
+      ></div>
+    </div>
+
+    <div class="progress-text">
+  Øvelse ${current} av ${total} • ${percentage}%
+</div>
+  `;
 }
 
 
