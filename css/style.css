@@ -588,6 +588,8 @@ animation: pulseGlow 2.5s infinite;
 
   display: block;
 
+  transition: all 0.25s ease;
+
 }
 
 #category {
@@ -614,10 +616,6 @@ animation: pulseGlow 2.5s infinite;
 
 }
 
-
-.exercise-video {
-  transition: all 0.25s ease;
-}
 
 .exercise-video:hover {
 
