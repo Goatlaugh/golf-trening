@@ -19,8 +19,13 @@ body {
 
 img {
   width:100%;
-  border-radius:12px;
-  margin-bottom:15px;
+  border-radius:20px;
+  margin-bottom:20px;
+
+  border: 1px solid rgba(255,255,255,0.08);
+
+  box-shadow:
+    0 10px 25px rgba(0,0,0,0.35);
 }
 
 h2 {
@@ -67,11 +72,6 @@ li::before {
 }
 
 
-.brand {
-  font-size: 13px;
-  letter-spacing: 2px;
-  color: rgba(255,255,255,0.7);
-}
 
 .app-title {
   font-size: 30px;
@@ -132,9 +132,10 @@ li::before {
 
 
 .card:hover {
-  transform: translateY(-3px);
+  transform: translateY(-3px) scale(1.01);
   box-shadow: 0 12px 25px rgba(0,0,0,0.6);
 }
+
 
 .card:hover .arrow {
   transform: translateX(5px);
@@ -161,7 +162,13 @@ li::before {
 
 
 h1 {
-  font-size:26px;
+  font-size: 30px;
+  font-weight: 700;
+
+  margin-bottom: 8px;
+
+  text-shadow: 
+    0 2px  8px  rgba(0,0,0,0.3);
 }
 
 h2 {
@@ -195,9 +202,11 @@ button {
   width:100%;
   height:65px;
   display:flex;
-  background:rgba(0,0,0,0.85);
-  backdrop-filter: blur(10px);
+  background:rgba(10,10,10,0.75);
+  backdrop-filter: blur(18px);
   border-top:1px solid rgba(255,255,255,0.1);
+  box-shadow:
+  0  -5px  25px  rgba(0,0,0,0.3);
 }
 
 .navbar button {
@@ -340,6 +349,8 @@ pointer-events: none;
 
 .progress-bar {
 
+  transition: all 0.25s ease;
+  
   margin-bottom: 20px;
 
   padding: 15px;
@@ -351,6 +362,16 @@ pointer-events: none;
   border: 1px solid rgba(255,255,255,0.08);
 
   backdrop-filter: blur(10px);
+
+}
+
+
+.progress-bar:hover {
+
+  border-color: rgba(31,164,99,0.3);
+
+  box-shadow:
+    0 0 12px rgba(31,164,99,0.15);
 
 }
 
@@ -432,7 +453,7 @@ height: 100%;
   margin-top: 8px;
   font-size: 15px;
   font-weight: 600;
-  color: white;
+  color: #32d17a;
 }
 
 
@@ -547,3 +568,83 @@ animation: pulseGlow 2.5s infinite;
   }
 
 }
+
+
+.exercise-video {
+
+  width: 100%;
+
+  border-radius: 20px;
+
+  border: 1px solid rgba(255,255,255,0.08);
+
+  box-shadow:
+    0 10px 25px rgba(0,0,0,0.35);
+
+  margin-bottom: 20px;
+
+  display: block;
+
+}
+
+#category {
+  animation: exerciseFade 0.25s ease;
+}
+
+#exercise {
+
+  animation: exerciseFade 0.35s ease;
+
+}
+
+@keyframes exerciseFade {
+
+  from {
+    opacity: 0;
+    transform: translateY(10px);
+  }
+
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+
+}
+
+
+.exercise-video {
+  transition: all 0.25s ease;
+}
+
+.exercise-video:hover {
+
+  transform: translateY(-2px);
+
+  box-shadow:
+    0 16px 35px rgba(0,0,0,0.45),
+    0 0 18px rgba(31,164,99,0.2);
+
+}
+
+.exercise-badge {
+
+  display: inline-block;
+
+  padding: 6px 12px;
+
+  margin-bottom: 12px;
+
+  border-radius: 999px;
+
+  background: rgba(31,164,99,0.15);
+
+  border: 1px solid rgba(31,164,99,0.3);
+
+  color: #32d17a;
+
+  font-size: 13px;
+
+  font-weight: 600;
+
+}
+
