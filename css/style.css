@@ -231,6 +231,10 @@ pointer-events: none;
 }
 
 
+
+
+
+
 .timer-controls {
   display: flex;
   justify-content: center;
@@ -243,4 +247,303 @@ pointer-events: none;
   max-width: 130px;
   width: auto !important;
   margin-top: 0;
+}
+
+.timer-buttons {
+  display: flex;
+  justify-content: center;
+  gap: 12px;
+  margin-top: 20px;
+}
+
+.timer-buttons button {
+  min-width: 120px;
+
+  padding: 14px 24px;
+
+  border: 1px solid rgba(255,255,255,0.15);
+
+  border-radius: 14px;
+
+  background: linear-gradient(
+    145deg,
+    #26b86a,
+    #188a50
+  );
+
+  color: white;
+
+  font-weight: 600;
+
+  letter-spacing: 0.5px;
+
+  box-shadow:
+    0 6px 18px rgba(0,0,0,0.35),
+    inset 0 1px 0 rgba(255,255,255,0.15);
+
+  transition: all 0.25s ease;
+}
+
+.timer-buttons button:first-child {
+  flex: 1.3;
+}
+
+.timer-buttons button:first-child:hover {
+  box-shadow:
+    0 0 20px rgba(31,164,99,0.55),
+    0 10px 24px rgba(0,0,0,0.4);
+}
+
+
+.timer-buttons button:hover {
+  transform: translateY(-3px);
+
+  background: linear-gradient(
+    145deg,
+    #2cc976,
+    #1fa463
+  );
+
+  box-shadow:
+    0 10px 24px rgba(0,0,0,0.45),
+    0 0 15px rgba(31,164,99,0.4);
+}
+
+
+.timer-buttons button:active {
+  transform: translateY(1px) scale(0.97);
+
+  box-shadow:
+    0 4px 10px rgba(0,0,0,0.3);
+}
+
+
+.timer-buttons {
+  animation: fadeButtons 0.25s ease;
+}
+
+@keyframes fadeButtons {
+  from {
+    opacity: 0;
+    transform: translateY(5px);
+  }
+
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+
+
+
+
+.progress-bar {
+
+  margin-bottom: 20px;
+
+  padding: 15px;
+
+  border-radius: 16px;
+
+  background: rgba(255,255,255,0.04);
+
+  border: 1px solid rgba(255,255,255,0.08);
+
+  backdrop-filter: blur(10px);
+
+}
+
+.progress-title {
+
+  text-align: center;
+
+  font-size: 12px;
+
+  font-weight: 600;
+
+  letter-spacing: 2px;
+
+  text-transform: uppercase;
+
+  color: rgba(255,255,255,0.65);
+
+  margin-bottom: 10px;
+
+}
+
+.progress-track {
+  height: 12px;
+  border-radius: 999px;
+  background: rgba(255,255,255,0.12);
+  overflow: hidden;
+}
+
+.progress-fill {
+position: relative;
+overflow: hidden;
+height: 100%;
+
+  background: linear-gradient(
+    90deg,
+    #1fa463,
+    #32d17a
+  );
+
+  border-radius: 999px;
+
+  box-shadow:
+    0 0 12px rgba(31,164,99,0.5),
+    0 0 25px rgba(31,164,99,0.35);
+
+  transition:
+    width 0.5s ease,
+    box-shadow 0.5s ease;
+
+  animation: progressGlow 2.5s infinite alternate;
+}
+
+.progress-fill::after {
+
+  content: "";
+
+  position: absolute;
+
+  top: 0;
+  left: -30%;
+
+  width: 30%;
+  height: 100%;
+
+  background: linear-gradient(
+    90deg,
+    transparent,
+    rgba(255,255,255,0.35),
+    transparent
+  );
+
+  animation: progressShine 2.5s infinite;
+
+}
+
+
+.progress-text {
+  text-align: center;
+  margin-top: 8px;
+  font-size: 15px;
+  font-weight: 600;
+  color: white;
+}
+
+
+
+.start-workout-btn {
+  width: 100%;
+position: relative;
+overflow: hidden;
+animation: pulseGlow 2.5s infinite;
+  background: #f59e0b;
+  color: white;
+  font-size: 1.2rem;
+  font-weight: bold;
+  padding: 16px;
+  margin-bottom: 20px;
+  border: none;
+  border-radius: 12px;
+}
+
+.start-workout-btn:hover {
+
+  animation-play-state: paused;
+
+  box-shadow:
+    0 0 25px rgba(245,158,11,0.9),
+    0 0 50px rgba(245,158,11,0.5);
+
+}
+
+
+.start-workout-btn:active {
+
+  transform: scale(0.98);
+
+}
+
+.start-workout-btn::before {
+
+  content: "";
+
+  position: absolute;
+
+  top: 0;
+  left: -100%;
+
+  width: 100%;
+  height: 100%;
+
+  background: linear-gradient(
+    90deg,
+    transparent,
+    rgba(255,255,255,0.25),
+    transparent
+  );
+
+  transition: left 0.6s ease;
+
+}
+
+@keyframes pulseGlow {
+
+  0% {
+    transform: scale(1);
+    box-shadow: 0 0 8px rgba(245,158,11,0.4);
+  }
+
+  50% {
+    transform: scale(1.02);
+    box-shadow:
+      0 0 20px rgba(245,158,11,0.7),
+      0 0 40px rgba(245,158,11,0.4);
+  }
+
+  100% {
+    transform: scale(1);
+    box-shadow: 0 0 8px rgba(245,158,11,0.4);
+  }
+
+}
+
+@keyframes progressGlow {
+
+  from {
+    box-shadow:
+      0 0 8px rgba(31,164,99,0.35),
+      0 0 18px rgba(31,164,99,0.2);
+  }
+
+  to {
+    box-shadow:
+      0 0 16px rgba(31,164,99,0.7),
+      0 0 32px rgba(31,164,99,0.35);
+  }
+
+}
+
+
+.start-workout-btn:hover::before {
+
+  left: 100%;
+
+}
+
+@keyframes progressShine {
+
+  from {
+    left: -30%;
+  }
+
+  to {
+    left: 130%;
+  }
+
 }
