@@ -563,7 +563,7 @@ function updateTimerDisplay() {
   const ring = document.getElementById("progressRing");
 
 if (ring) {
-  ring.style.transition = "stroke-dashoffset 0.9s linear";
+  ring.style.transition = "stroke-dashoffset 1s linear";
 }
 
   if (ring && totalTime > 0) {
