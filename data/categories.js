@@ -23,5 +23,10 @@ const categories = [
     id: "putting",
     navn: "⛳ Putting",
     data: putting
+  },
+{
+    id: "styrke",
+    navn: "💪 Styrke",
+    data: styrke
   }
 ];
