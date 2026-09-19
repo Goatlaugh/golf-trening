@@ -28,9 +28,42 @@ img {
     0 10px 25px rgba(0,0,0,0.35);
 }
 
+
+.exercise-video {
+
+  object-fit: cover;
+
+  width: 100%;
+
+  border-radius: 20px;
+
+  border: 1px solid rgba(255,255,255,0.08);
+
+  box-shadow:
+    0 10px 25px rgba(0,0,0,0.35);
+
+  margin-bottom: 20px;
+
+  display: block;
+
+  transition: all 0.25s ease;
+
+  animation: mediaReveal 0.4s ease;
+
+}
+
+.exercise-video:not(:hover) {
+
+  filter: saturate(0.95);
+
+}
+
+
 h2 {
   margin-top:0;
+  color:#1fa463;
 }
+
 
 ul {
   list-style: none;   /* fjerner bulletpoints */
@@ -51,7 +84,7 @@ li::before {
 }
 
 .fremgang-linje {
-  margin-bottom: 6px;
+  margin-bottom: 8px;
   line-height: 1.4;
 }
 
@@ -61,9 +94,6 @@ li::before {
   display: inline-block;
 }
 
-.fremgang-linje {
-  margin-bottom: 8px;
-}
 
 
 
@@ -170,11 +200,11 @@ h1 {
 
   text-shadow: 
     0 2px  8px  rgba(0,0,0,0.3);
+
+  animation: titleReveal 0.4s ease;
 }
 
-h2 {
-  color:#1fa463;
-}
+
 
 b {
   display:block;
@@ -267,7 +297,10 @@ pointer-events: none;
   justify-content: center;
   gap: 12px;
   margin-top: 20px;
+  animation: fadeButtons 0.25s ease;
 }
+
+
 
 .timer-buttons button {
   min-width: 120px;
@@ -331,9 +364,6 @@ pointer-events: none;
 }
 
 
-.timer-buttons {
-  animation: fadeButtons 0.25s ease;
-}
 
 @keyframes fadeButtons {
   from {
@@ -574,35 +604,6 @@ animation: pulseGlow 2.5s infinite;
 }
 
 
-.exercise-video {
-
-  object-fit: cover;
-
-  width: 100%;
-
-  border-radius: 20px;
-
-  border: 1px solid rgba(255,255,255,0.08);
-
-  box-shadow:
-    0 10px 25px rgba(0,0,0,0.35);
-
-  margin-bottom: 20px;
-
-  display: block;
-
-  transition: all 0.25s ease;
-
-  animation: mediaReveal 0.4s ease;
-
-}
-
-.exercise-video:not(:hover) {
-
-  filter: saturate(0.95);
-
-}
-
 
 #category {
   animation: exerciseFade 0.25s ease;
@@ -663,19 +664,6 @@ animation: pulseGlow 2.5s infinite;
 
 }
 
-
-.tag-container {
-
-  display: flex;
-
-  flex-wrap: wrap;
-
-  gap: 8px;
-
-  margin-bottom: 18px;
-
-}
-
 .exercise-tag {
 
   padding: 6px 12px;
@@ -697,6 +685,21 @@ animation: pulseGlow 2.5s infinite;
      box-shadow 0.2s ease;
 
 }
+
+
+.tag-container {
+
+  display: flex;
+
+  flex-wrap: wrap;
+
+  gap: 8px;
+
+  margin-bottom: 18px;
+
+}
+
+
 
 
 .exercise-tag:hover {
@@ -723,11 +726,7 @@ animation: pulseGlow 2.5s infinite;
 
 }
 
-h1 {
 
-  animation: titleReveal 0.4s ease;
-
-}
 
 @keyframes titleReveal {
 
