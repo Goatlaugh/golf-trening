@@ -7,6 +7,93 @@ let timerInterval;
 let remainingTime = 0;
 let totalTime = 0;
 let timerRunning = false;
+function resetTimerState() {
+  clearInterval(timerInterval);
+  timerRunning = false;
+  remainingTime = 0;
+  totalTime = 0;
+}
+function createExerciseCard(name, index) {
+  return `
+    <div class="card" onclick="openExercise(${index})">
+      <span class="left">${name}</span>
+      <span class="arrow">›</span>
+    </div>
+  `;
+}
+
+
+function createStrengthFilters() {
+
+  return `
+
+    <div class="strength-all">
+
+      <button
+        class="${activeStrengthFilter === 'Alle' ? 'active-filter' : ''}"
+        onclick="filterStrength('Alle')">
+        Alle Øvelser
+      </button>
+
+    </div>
+
+    <div class="strength-filters">
+
+      <button
+        class="${activeStrengthFilter === 'Armer og skuldre' ? 'active-filter' : ''}"
+        onclick="filterStrength('Armer og skuldre')">
+        💪 Armer
+      </button>
+
+      <button
+        class="${activeStrengthFilter === 'Kjernemuskulatur' ? 'active-filter' : ''}"
+        onclick="filterStrength('Kjernemuskulatur')">
+        🧠 Kjerne
+      </button>
+
+      <button
+        class="${activeStrengthFilter === 'Rygg' ? 'active-filter' : ''}"
+        onclick="filterStrength('Rygg')">
+        🏋️ Rygg
+      </button>
+
+      <button
+        class="${activeStrengthFilter === 'Ben' ? 'active-filter' : ''}"
+        onclick="filterStrength('Ben')">
+        🦵 Ben
+      </button>
+
+      <button
+        class="${activeStrengthFilter === 'Mage' ? 'active-filter' : ''}"
+        onclick="filterStrength('Mage')">
+        🔥 Mage
+      </button>
+
+    </div>
+
+  `;
+}
+
+
+function renderList(title, items) {
+
+  if (!items) {
+    return "";
+  }
+
+  let html = `<b>${title}</b><ul>`;
+
+  items.forEach(item => {
+    html += `<li>${item}</li>`;
+  });
+
+  html += "</ul>";
+
+  return html;
+}
+
+
+
 
 function createMenu() {
 
@@ -53,67 +140,18 @@ if (cat === "oppvarming") {
 `;
 }
 
+
 if (cat === "styrke") {
 
- html += `
-
-  <div class="strength-all">
-
-    <button
-  class="${activeStrengthFilter === 'Alle' ? 'active-filter' : ''}"
-  onclick="filterStrength('Alle')">
-      Alle Øvelser
-    </button>
-
-  </div>
-
-  <div class="strength-filters">
-
-    <button
-  class="${activeStrengthFilter === 'Armer og skuldre' ? 'active-filter' : ''}"
-  onclick="filterStrength('Armer og skuldre')">
-      💪 Armer
-    </button>
-
-    <button
-    class="${activeStrengthFilter === 'Kjernemuskulatur' ? 'active-filter' : ''}"
-    onclick="filterStrength('Kjernemuskulatur')">
-      🧠 Kjerne
-    </button>
-
-    <button
-    class="${activeStrengthFilter === 'Rygg' ? 'active-filter' : ''}"
-    onclick="filterStrength('Rygg')">
-      🏋️ Rygg
-    </button>
-
-    <button
-    class="${activeStrengthFilter === 'Ben' ? 'active-filter' : ''}"
-    onclick="filterStrength('Ben')">
-      🦵 Ben
-    </button>
-
-    <button
-    class="${activeStrengthFilter === 'Mage' ? 'active-filter' : ''}"
-    onclick="filterStrength('Mage')">
-      🔥 Mage
-    </button>
-
-  </div>
-
-`;
+  html += createStrengthFilters();
 
 }
 
 
 
-  currentList.forEach((e,i)=>{
-   html += '<div class="card" onclick="openExercise(' + i + ')">' +
-          '<span class="left">' + e.navn + '</span>' +
-          '<span class="arrow">›</span>' +
-        '</div>';
-
-  });
+  currentList.forEach((e, i) => {
+  html += createExerciseCard(e.navn, i);
+});
 
   document.getElementById("category").innerHTML = html;
   show("category");
@@ -142,70 +180,12 @@ function filterStrength(tag) {
 
   let html = "<h2>STYRKE</h2>";
 
-  html += `
-
-  <div class="strength-all">
-
-  <button
-    class="${activeStrengthFilter === 'Alle' ? 'active-filter' : ''}"
-    onclick="filterStrength('Alle')">
-    Alle Øvelser
-  </button>
-
-</div>
-
-  <div class="strength-filters">
-
-    <button
-    class="${activeStrengthFilter === 'Armer og skuldre' ? 'active-filter' : ''}"
-    onclick="filterStrength('Armer og skuldre')">
-      💪 Armer
-    </button>
-
-    <button
-    class="${activeStrengthFilter === 'Kjernemuskulatur' ? 'active-filter' : ''}"
-    onclick="filterStrength('Kjernemuskulatur')">
-      🧠 Kjerne
-    </button>
-
-    <button
-    class="${activeStrengthFilter === 'Rygg' ? 'active-filter' : ''}"
-    onclick="filterStrength('Rygg')">
-      🏋️ Rygg
-    </button>
-
-    <button
-    class="${activeStrengthFilter === 'Ben' ? 'active-filter' : ''}"
-    onclick="filterStrength('Ben')">
-      🦵 Ben
-    </button>
-
-    <button
-    class="${activeStrengthFilter === 'Mage' ? 'active-filter' : ''}"
-    onclick="filterStrength('Mage')">
-
-      🔥 Mage
-    </button>
-
-  </div>
-
-`;
+  html += createStrengthFilters();
 
   exercises.forEach((e, i) => {
+  html += createExerciseCard(e.navn, i);
+});
 
-    html += `
-      <div class="card" onclick="openExercise(${i})">
-
-        <span class="left">
-          ${e.navn}
-        </span>
-
-        <span class="arrow">›</span>
-
-      </div>
-    `;
-
-  });
 
   document.getElementById("category").innerHTML = html;
 
@@ -219,10 +199,7 @@ function startOppvarming() {
 
 function openExercise(i, autoStart = false) {
 
-  clearInterval(timerInterval);
-  timerRunning = false;
-  remainingTime = 0;
-  totalTime = 0;
+  resetTimerState();
 
   keepScreenOn();
 
@@ -246,23 +223,20 @@ if (exercise) {
     exercise.style.opacity = "1";
   }
 
-}, 150);
 
-
-
-  if (autoStart) {
+if (autoStart) {
 
     const exercise = currentList[currentIndex];
-
 
 
 if (exercise.timer) {
 
   const video = document.getElementById("exerciseVideo");
 
-  if (video) {
 
-   video.addEventListener("canplaythrough", () => {
+if (video) {
+
+  video.addEventListener("loadedmetadata", () => {
 
   setTimeout(() => {
     startTimer(exercise.timer);
@@ -276,14 +250,16 @@ if (exercise.timer) {
       startTimer(exercise.timer);
     }, exercise.autoStartDelay || 3000);
 
-  }
+  	    }
 
-}
+	   }
 
-  }
+  	  }
 
-}
 
+	 }, 150);
+
+	}
 
 function renderExercise() {
   let e = currentList[currentIndex];
@@ -347,17 +323,10 @@ if (e.styrkeTag) {
 }
 
 
-if (e.muskelgruppe) {
-
-  html += "<b>Muskelgruppe:</b><ul>";
-
-  e.muskelgruppe.forEach(m => {
-    html += "<li>" + m + "</li>";
-  });
-
-  html += "</ul>";
-
-}
+html += renderList(
+  "Muskelgruppe:",
+  e.muskelgruppe
+);
 
 if (e.repetisjon) {
 
@@ -367,40 +336,24 @@ if (e.repetisjon) {
 
 }
 
-if (e.utstyr) {
-
-  html += "<b>Utstyr:</b><ul>";
-
-  e.utstyr.forEach(u => {
-    html += "<li>" + u + "</li>";
-  });
-
-  html += "</ul>";
-
-}
+html += renderList(
+  "Utstyr:",
+  e.utstyr
+);
 
 
 
-  if (e.fokus) {
-
-  html += "<b>Fokus:</b><ul>";
-
-  e.fokus.forEach(f => {
-    html += "<li>" + f + "</li>";
-  });
-
-  html += "</ul>";
-
-}
+html += renderList(
+  "Fokus:",
+  e.fokus
+);
 
 
-if (e.sjekkpunkter) {
-  html += "<b>Sjekkpunkter:</b><ul>";
-  e.sjekkpunkter.forEach(s => {
-    html += "<li>" + s + "</li>";
-  });
-  html += "</ul>";
-}
+html += renderList(
+  "Sjekkpunkter:",
+  e.sjekkpunkter
+);
+
 
 if (e.fremgang) {
   html += "<b>Fremgangsmåte:</b>";
@@ -505,11 +458,10 @@ function goNext() {
 }
 
 function goMenu() {
-clearInterval(timerInterval);
-timerRunning = false;
-remainingTime = 0;
-totalTime = 0;  
-show("main");
+
+  resetTimerState();
+
+  show("main");
   currentScreen = "main";
 }
 
@@ -589,16 +541,12 @@ function pauseTimer() {
 
 function resetTimer(seconds) {
 
-  clearInterval(timerInterval);
-
-  timerRunning = false;
+  resetTimerState();
 
   remainingTime = seconds;
-
-totalTime = seconds;
+  totalTime = seconds;
 
   updateTimerDisplay();
-
   updateTimerButtons(seconds);
 
 }
@@ -624,7 +572,7 @@ if (ring) {
     const circumference = 2 * Math.PI * radius;
 
     const progress = remainingTime / totalTime;
-console.log(progress);
+
 
     ring.style.strokeDasharray =
   circumference + " " + circumference;
