@@ -1,20 +1,398 @@
+/* ===================================================
+        ROOT THEME
+=================================================== */
+
+:root {
+
+/* =====*===================
+   GLOBAL DESIGN SYSTEM
+========================= */
+
+  /* Main Theme */
+
+  --background-color: #0b2d1f;
+
+  --primary-color: #1fa463;
+
+  --primary-light-color: #32d17a;
+
+  --text-color: #ffffff;
+
+  --secondary-text-color: rgba(255,255,255,0.65);
+
+
+  /* Status Colors */
+
+  --success-color: #1fa463;
+
+  --warning-color: #ff9900;
+
+  --danger-color: #ff3333;
+
+  --workout-start-color: #f59e0b;
+
+
+  /* Borders */
+
+  --border-light: rgba(255,255,255,0.08);
+
+  --border-medium: rgba(255,255,255,0.12);
+
+  --border-strong: rgba(255,255,255,0.15);
+
+  --primary-border: rgba(31,164,99,0.3);
+
+  --primary-border-hover: rgba(31,164,99,0.35);
+
+
+  /* Radius */
+
+  --radius-large: 20px;
+
+  --radius-medium: 16px;
+
+  --radius-small: 12px;
+
+  --radius-button: 10px;
+
+  --radius-pill: 999px;
+
+
+  /* Shadows */
+
+  --shadow-soft: 0 10px 25px rgba(0,0,0,0.35);
+
+  --shadow-card: 0 8px 20px rgba(0,0,0,0.45);
+
+  --shadow-hover: 0 12px 25px rgba(0,0,0,0.6);  
+
+
+  /* Typography */
+
+  --font-family: Arial;
+
+  --heading-size: 30px;
+
+  --text-small: 13px;
+
+  --text-medium: 16px;
+
+  --card-font-size: 18px;
+
+  --font-weight-bold: 700;
+
+  --h1-margin-bottom: 8px;
+
+  --brand-letter-spacing: 2px;
+
+  --title-line-height: 1.2;
+
+  --title-shadow:
+    0 3px 10px rgba(0,0,0,0.6);
+
+  --heading-shadow:
+    0 2px 8px rgba(0,0,0,0.3);
+
+  --brand-shadow:
+    0 2px 6px rgba(0,0,0,0.5);
+
+  --brand-color:
+    rgba(255,255,255,0.8);
+
+
+  /* Layout */
+
+  --screen-max-width: 600px;
+
+  --screen-padding: 20px;
+
+  --navbar-height: 65px;
+
+  --content-bottom-spacing: 80px;
+
+  --hero-offset-top: -20px;
+
+  --hero-offset-bottom: -100px;
+
+  --hero-image-max-width: 350px;
+
+  --hero-hover-scale: 1.05;
+
+
+/* ================================
+   COMPONENT VARIABLES
+================================ */
+
+  /* Card Colors */
+
+  --card-gradient-start: #12422c;
+
+  --card-gradient-end: #0e3323;
+
+  --card-border-color: rgba(150,255,120,0.2);
+
+  --filter-active-start: #145236;
+
+  --filter-active-end: #11422c;
+
+
+  /* Card Layout */
+
+  --card-padding-y: 18px;
+
+  --card-padding-x: 20px;
+
+  --card-margin-y: 14px;
+
+  --card-icon-gap: 10px;
+
+  --card-arrow-size: 24px;
+
+  --card-arrow-opacity: 0.6;
+
+
+
+  /* Buttons */
+
+  --button-padding: 15px;
+
+  --button-margin-top: 10px;
+
+  --button-radius: var(--radius-button);
+
+  --button-font-size: var(--text-medium);
+
+  --button-gradient-start: var(--primary-color);
+
+  --button-gradient-end: #178a52;
+
+
+  /* Workout Button */
+
+  --workout-button-font-size: 1.2rem;
+
+  --workout-button-padding: 16px;
+
+  --workout-button-margin-bottom: 20px;
+
+  --workout-button-radius: 12px;
+
+  --workout-glow-strong:
+    0 0 25px rgba(245,158,11,0.9);
+
+  --workout-glow-soft:
+    0 0 50px rgba(245,158,11,0.5);
+
+  --shine-opacity: rgba(255,255,255,0.25);
+
+
+
+  /* Exercise Components */
+
+  --exercise-pill-padding:
+    6px 12px;
+
+  --exercise-pill-radius:
+    var(--radius-pill);
+
+  --exercise-pill-background:
+    rgba(31,164,99,0.15);
+
+  --exercise-pill-border:
+    rgba(31,164,99,0.3);
+
+  --exercise-pill-color:
+    var(--primary-light-color);
+
+  --exercise-badge-font-size:
+    var(--text-small);
+
+  --exercise-tag-font-size:
+    10px;
+
+  --exercise-tag-gap: 8px;
+
+  --exercise-tag-margin-bottom: 18px;
+
+  --exercise-badge-margin-bottom: 12px;
+
+
+
+  /* Timer */
+
+  --timer-gap-small: 10px;
+
+  --timer-gap-large: 12px;
+
+  --timer-margin-top: 15px;
+
+  --timer-buttons-margin-top: 20px;
+
+  --timer-button-max-width: 130px;
+
+  --timer-button-min-width: 120px;
+
+  --timer-button-padding:
+    14px 24px;
+
+  --timer-button-radius: 14px;
+
+  --timer-button-font-weight: 600;
+
+  --timer-button-letter-spacing: 0.5px;
+
+  --timer-button-border:
+    rgba(255,255,255,0.15);
+
+  --timer-gradient-start: #26b86a;
+
+  --timer-gradient-end: #188a50;
+
+  --timer-hover-start: #2cc976;
+
+  --timer-hover-end: #1fa463;
+
+
+  /* Progress Bar */
+
+  --progress-padding: 15px;
+
+  --progress-margin-bottom: 20px;
+
+  --progress-radius: var(--radius-medium);
+
+  --progress-track-radius: var(--radius-pill);
+
+  --progress-track-height: 12px;
+
+  --progress-title-size: 12px;
+
+  --progress-text-size: 15px;
+
+  --progress-title-spacing: 2px;
+
+  --progress-text-weight: 600;
+
+  --progress-background:
+    rgba(255,255,255,0.04);
+
+  --progress-border:
+    rgba(255,255,255,0.08);
+
+  --progress-track-background:
+    rgba(255,255,255,0.12);
+
+  --progress-title-color:
+    var(--secondary-text-color);
+
+  --progress-fill-start:
+    var(--primary-color);
+
+  --progress-fill-end:
+    var(--primary-light-color);
+
+  --progress-text-color:
+    var(--primary-light-color);
+
+
+  
+
+
+  /* Responsive */
+
+  --mobile-max-width: 500px;
+
+  --hero-mobile-gap: 10px;
+
+  --hero-mobile-max-width: 220px;
+
+}
+
+/* ===================================================
+        GLOBAL LAYOUT
+=================================================== */
 
 body {
-  margin:0;
-  font-family:Arial;
-  background:#0b2d1f;
-  color:white;
+  margin: 0;
+  font-family: var(--font-family);
+  background: var(--background-color);
+  color: var(--text-color);
 }
 
 .screen {
-  display:none;
-  padding:20px;
-  padding-bottom:80px;
-  max-width: 600px;
+  display: none;
+
+  padding: var(--screen-padding);
+
+  padding-bottom: var(--content-bottom-spacing);
+
+  max-width: var(--screen-max-width);
+
   margin: auto;
 }
 
-.active { display:block; }
+.active {
+  display: block;
+}
+
+
+/* ===================================================
+   TYPOGRAPHY
+=================================================== */
+
+h1 {
+  font-size: var(--heading-size);
+
+  font-weight: var(--font-weight-bold);
+
+  margin-bottom: var(--h1-margin-bottom);
+
+  text-shadow: var(--heading-shadow);
+
+  animation: titleReveal 0.4s ease;
+}
+
+h2 {
+  margin-top: 0;
+
+  color: var(--primary-color);
+}
+
+b {
+  display: block;
+
+  margin-top: 10px;
+
+  margin-bottom: 5px;
+
+  color: var(--primary-color);
+}
+
+.app-title {
+  font-size: var(--heading-size);
+
+  font-weight: var(--font-weight-bold);
+
+  line-height: var(--title-line-height);
+
+  text-shadow: var(--title-shadow);
+}
+
+.brand {
+  font-size: var(--text-small);
+
+  letter-spacing: var(--brand-letter-spacing);
+
+  color: var(--brand-color);
+
+  text-shadow: var(--brand-shadow);
+}
+
+
+
+/* ===================================================
+   MEDIA
+=================================================== */
 
 
 img {
@@ -58,11 +436,20 @@ img {
 
 }
 
+.exercise-video:hover {
 
-h2 {
-  margin-top:0;
-  color:#1fa463;
+  transform: translateY(-2px);
+
+  box-shadow:
+    0 16px 35px rgba(0,0,0,0.45),
+    0 0 18px rgba(31,164,99,0.2);
+
 }
+
+
+/* ==*================================================
+        LISTS & TEXT CONTENT
+=================================================== */
 
 
 ul {
@@ -78,7 +465,7 @@ li::before {
   content: "- ";      /* legger til bindestrek */
 }
 
-/* Fjerner "-" fra fremgangsmåte */
+
 .fremgang li::before {
   content: "";
 }
@@ -94,79 +481,52 @@ li::before {
   display: inline-block;
 }
 
-
-
-
-.hero:hover .hero-img {
-  transform: scale(1.05);
+.exercise-repetisjon {
+  margin-bottom: 22px;
+  font-size: 17px;
 }
 
 
 
-.app-title {
-  font-size: 30px;
-  font-weight: 700;
-  line-height: 1.2;
-  text-shadow: 0 3px 10px rgba(0,0,0,0.6);
-}
-
-.brand {
-  font-size: 13px;
-  letter-spacing: 2px;
-  color: rgba(255,255,255,0.8);
-  text-shadow: 0 2px 6px rgba(0,0,0,0.5);
-}
-
-@media (max-width: 500px) {
-  .hero {
-    flex-direction: column;
-    align-items: flex-start;
-    gap: 10px;
-  }
-
-  .hero-img {
-    width: 100%;
-    max-width: 220px;
-    align-self: center;
-  }
-}
-
-
+/* ==*================================================
+        CARDS
+=================================================== */
 
 .card {
   display: flex;
   align-items: center;
   justify-content: space-between;
 
-  padding: 18px 20px;
-  margin: 14px 0;
+  padding:
+  var(--card-padding-y)
+  var(--card-padding-x);
 
-  border-radius: 20px;
+  margin:
+  var(--card-margin-y)
+  0;
 
-  /* Litt bedre farge */
-  background: linear-gradient(145deg, #12422c, #0e3323);
+  border-radius: var(--radius-large);
 
-  /* Outline som i designet ditt */
-  border: 1px solid rgba(150, 255, 120, 0.2);
+  background: linear-gradient(145deg,
+  var(--card-gradient-start),
+  var(--card-gradient-end)
+);
 
-  /* Mer dybde */
-  box-shadow: 0 8px 20px rgba(0,0,0,0.45);
+  border: 1px solid var(--card-border-color);
 
-  font-size: 18px;
+  box-shadow: var(--shadow-card);
+
+  font-size: var(--card-font-size);
   cursor: pointer;
 
   transition: all 0.2s ease;
   animation: cardFade 0.4s ease;
 }
 
-
-
-
 .card:hover {
   transform: translateY(-3px) scale(1.01);
-  box-shadow: 0 12px 25px rgba(0,0,0,0.6);
+  box-shadow: var(--shadow-hover);
 }
-
 
 .card:hover .arrow {
   transform: translateX(5px);
@@ -181,51 +541,112 @@ li::before {
 .card .left {
   display: flex;
   align-items: center;
-  gap: 10px;
+  gap: var(--card-icon-gap);
 }
 
 
 .card .arrow {
-  font-size: 24px;
-  opacity: 0.6;
+  font-size: var(--card-arrow-size);
+
+  opacity: var(--card-arrow-opacity);
   transition: all 0.2s ease;
 }
 
 
-h1 {
-  font-size: 30px;
-  font-weight: 700;
-
-  margin-bottom: 8px;
-
-  text-shadow: 
-    0 2px  8px  rgba(0,0,0,0.3);
-
-  animation: titleReveal 0.4s ease;
-}
-
-
-
-b {
-  display:block;
-  margin-top:10px;
-  margin-bottom:5px;
-  color:#1fa463;
-}
-
-
-
+/* ===================================================
+   BUTTONS
+=================================================== */
 
 button {
-  width:100%;
-  padding:15px;
-  margin-top:10px;
-  border:none;
-  border-radius:10px;
-  background:linear-gradient(145deg, #1fa463, #178a52);
-  color:white;
-  font-size:16px;
+
+  width: 100%;
+
+  padding: var(--button-padding);
+
+  margin-top: var(--button-margin-top);
+
+  border: none;
+
+  border-radius: var(--button-radius);
+
+  background: linear-gradient(
+    145deg,
+    var(--button-gradient-start),
+    var(--button-gradient-end)
+  );
+
+  color: var(--text-color);
+
+  font-size: var(--button-font-size);
+
 }
+
+
+.start-workout-btn {
+  width: 100%;
+position: relative;
+overflow: hidden;
+animation: pulseGlow 2.5s infinite;
+  background: var(--workout-start-color);
+  color: var(--text-color);
+  font-size: var(--workout-button-font-size);
+  font-weight: bold;
+  padding: var(--workout-button-padding);
+  margin-bottom: var(--workout-button-margin-bottom);
+  border: none;
+  border-radius: var(--workout-button-radius);
+}
+
+.start-workout-btn:hover {
+
+  animation-play-state: paused;
+
+  box-shadow:
+   var(--workout-glow-strong),
+   var(--workout-glow-soft);
+
+}
+
+
+.start-workout-btn:active {
+
+  transform: scale(0.98);
+
+}
+
+.start-workout-btn::before {
+
+  content: "";
+
+  position: absolute;
+
+  top: 0;
+  left: -100%;
+
+  width: 100%;
+  height: 100%;
+
+  background: linear-gradient(
+    90deg,
+    transparent,
+    var(--shine-opacity),
+    transparent
+  );
+
+  transition: left 0.6s ease;
+
+}
+
+.start-workout-btn:hover::before {
+
+  left: 100%;
+
+}
+
+
+/* ===================================================
+   NAVIGATIONS
+=================================================== */
 
 .navbar {
   position:fixed;
@@ -249,20 +670,27 @@ button {
 }
 
 
-/* HERO BILDE */
+/* ===================================================
+   HERO
+=================================================== */
+
 .hero-image {
   text-align: center;
-margin-top: -20px;   /* trekker bildet litt opp */
-  margin-bottom: -100px;
- position: relative;
-  z-index: 1;
-pointer-events: none;
 
+  margin-top: var(--hero-offset-top);
+
+  margin-bottom: var(--hero-offset-bottom);
+
+  position: relative;
+
+  z-index: 1;
+
+  pointer-events: none;
 }
 
 .hero-image img {
   width: 100%;
-  max-width: 350px;
+  max-width: var(--hero-image-max-width);
   height: auto;
   border: none;
   box-shadow: none;
@@ -273,21 +701,28 @@ pointer-events: none;
   -webkit-mask-image: linear-gradient(to bottom, black 70%, transparent);
 }
 
+.hero:hover .hero-img {
+  transform: scale(var(--hero-hover-scale));
+}
 
 
 
+/* ===================================================
+   TIMER
+=================================================== */
 
 
 .timer-controls {
   display: flex;
   justify-content: center;
-  gap: 10px;
-  margin-top: 15px;
+  gap: var(--timer-gap-small);
+
+  margin-top: var(--timer-margin-top);
 }
 
 .timer-controls button {
   flex: 1;
-  max-width: 130px;
+  max-width: var(--timer-button-max-width);
   width: auto !important;
   margin-top: 0;
 }
@@ -295,33 +730,34 @@ pointer-events: none;
 .timer-buttons {
   display: flex;
   justify-content: center;
-  gap: 12px;
-  margin-top: 20px;
+  gap: var(--timer-gap-large);
+
+  margin-top: var(--timer-buttons-margin-top);
   animation: fadeButtons 0.25s ease;
 }
 
 
 
 .timer-buttons button {
-  min-width: 120px;
+  min-width: var(--timer-button-min-width);
 
-  padding: 14px 24px;
+  padding: var(--timer-button-padding);
 
-  border: 1px solid rgba(255,255,255,0.15);
+  border: 1px solid var(--timer-button-border);
 
-  border-radius: 14px;
+  border-radius: var(--timer-button-radius);
 
   background: linear-gradient(
     145deg,
-    #26b86a,
-    #188a50
+    var(--timer-gradient-start),
+    var(--timer-gradient-end)
   );
 
   color: white;
 
-  font-weight: 600;
+  font-weight: var(--timer-button-font-weight);
 
-  letter-spacing: 0.5px;
+  letter-spacing: var(--timer-button-letter-spacing);
 
   box-shadow:
     0 6px 18px rgba(0,0,0,0.35),
@@ -346,8 +782,8 @@ pointer-events: none;
 
   background: linear-gradient(
     145deg,
-    #2cc976,
-    #1fa463
+    var(--timer-hover-start),
+    var(--timer-hover-end)
   );
 
   box-shadow:
@@ -364,36 +800,24 @@ pointer-events: none;
 }
 
 
-
-@keyframes fadeButtons {
-  from {
-    opacity: 0;
-    transform: translateY(5px);
-  }
-
-  to {
-    opacity: 1;
-    transform: translateY(0);
-  }
-}
-
-
-
+/* ===================================================
+   PROGRESS BAR
+=================================================== */
 
 
 .progress-bar {
 
   transition: all 0.25s ease;
   
-  margin-bottom: 20px;
+  margin-bottom: var(--progress-margin-bottom);
 
-  padding: 15px;
+  padding: var(--progress-padding);
 
-  border-radius: 16px;
+  border-radius: var(--progress-radius);
 
-  background: rgba(255,255,255,0.04);
+  background: var(--progress-background);
 
-  border: 1px solid rgba(255,255,255,0.08);
+  border: 1px solid var(--progress-border);
 
   backdrop-filter: blur(10px);
 
@@ -413,24 +837,24 @@ pointer-events: none;
 
   text-align: center;
 
-  font-size: 12px;
+  font-size: var(--progress-title-size);
 
-  font-weight: 600;
+  font-weight: var(--progress-text-weight);
 
-  letter-spacing: 2px;
+  letter-spacing: var(--progress-title-spacing);
 
   text-transform: uppercase;
 
-  color: rgba(255,255,255,0.65);
+  color: var(--progress-title-color);
 
   margin-bottom: 10px;
 
 }
 
 .progress-track {
-  height: 12px;
-  border-radius: 999px;
-  background: rgba(255,255,255,0.12);
+  height: var(--progress-track-height);
+  border-radius: var(--progress-track-radius);
+  background: var(--progress-track-background);
   overflow: hidden;
 }
 
@@ -444,11 +868,12 @@ transition:
 
   background: linear-gradient(
     90deg,
-    #1fa463,
-    #32d17a
+    var(--progress-fill-start),
+    var(--progress-fill-end)
   );
 
-  border-radius: 999px;
+  border-radius:
+   var(--progress-track-radius);
 
   box-shadow:
     0 0 12px rgba(31,164,99,0.5),
@@ -485,67 +910,251 @@ transition:
 .progress-text {
   text-align: center;
   margin-top: 8px;
-  font-size: 15px;
+  font-size: var(--progress-text-size);
+  font-weight: var(--progress-text-weight);
+  color: var(--progress-text-color);
+}
+
+
+
+
+/* ===================================================
+   EXERCISE COMPONENTS
+=================================================== */
+
+.exercise-badge {
+
+  display: inline-block;
+
+  padding: var(--exercise-pill-padding);
+
+  margin-bottom: var(--exercise-badge-margin-bottom);
+
+  border-radius: var(--exercise-pill-radius);
+
+  background: var(--exercise-pill-background);
+
+  border: 1px solid var(--exercise-pill-border);
+
+  color: var(--exercise-pill-color);
+
+  font-size: var(--exercise-badge-font-size);
+
   font-weight: 600;
-  color: #32d17a;
+
 }
 
+.exercise-tag {
 
+  padding: var(--exercise-pill-padding);
 
-.start-workout-btn {
-  width: 100%;
-position: relative;
-overflow: hidden;
-animation: pulseGlow 2.5s infinite;
-  background: #f59e0b;
-  color: white;
-  font-size: 1.2rem;
-  font-weight: bold;
-  padding: 16px;
-  margin-bottom: 20px;
-  border: none;
-  border-radius: 12px;
+  border-radius: var(--exercise-pill-radius);
+
+  background: var(--exercise-pill-background);
+
+  border: 1px solid var(--exercise-pill-border);
+
+  color: var(--exercise-pill-color);
+
+  font-size: var(--exercise-tag-font-size);
+
+  font-weight: 500;
+  
+  transition: 
+     transform 0.2s ease,
+     box-shadow 0.2s ease;
+
 }
 
-.start-workout-btn:hover {
+.exercise-tag:hover {
 
-  animation-play-state: paused;
+  transform: translateY(-2px);
 
   box-shadow:
-    0 0 25px rgba(245,158,11,0.9),
-    0 0 50px rgba(245,158,11,0.5);
+    0 0 12px rgba(31,164,99,0.3);
+
+}
+
+.tag-container {
+
+  display: flex;
+
+  flex-wrap: wrap;
+
+  gap: var(--exercise-tag-gap);
+
+  margin-bottom: var(--exercise-tag-margin-bottom);
 
 }
 
 
-.start-workout-btn:active {
 
-  transform: scale(0.98);
+/* ===================================================
+   STRENGTH FILTERS
+=================================================== */
+
+/* Filter Container */
+.strength-filters {
+
+  display: flex;
+
+  flex-wrap: wrap;
+
+  justify-content: center;
+
+  gap: 8px;
+
+  padding-bottom: 10px;
+
+  margin-bottom: 15px;
 
 }
 
-.start-workout-btn::before {
 
-  content: "";
+.strength-filters::-webkit-scrollbar {
+  display: none;
+}
 
-  position: absolute;
+/* Filter Buttons */
+.strength-filters button,
+.strength-all button {
 
-  top: 0;
-  left: -100%;
+  width: auto;
 
-  width: 100%;
-  height: 100%;
+  margin-top: 0;
+
+  padding: 10px 16px;
+
+  border-radius: 999px;
+
+  border: 1px solid rgba(255,255,255,0.12);
+
+  background: rgba(255,255,255,0.06);
+
+  backdrop-filter: blur(10px);
+
+  color: white;
+
+  font-size: 13px;
+
+  font-weight: 600;
+
+  box-shadow:
+    0 6px 14px rgba(0,0,0,0.2);
+
+  transition: all 0.25s ease;
+}
+
+/* Active Filter State */
+.active-filter {
 
   background: linear-gradient(
-    90deg,
-    transparent,
-    rgba(255,255,255,0.25),
-    transparent
+    145deg,
+    #145236,
+    #11422c
   );
 
-  transition: left 0.6s ease;
+  border: 1px solid rgba(150,255,120,0.3);
+
+  font-weight: 700;
+
+  transform: scale(1.10);
+
+  box-shadow:
+    0 8px 20px rgba(0,0,0,0.45);
 
 }
+
+
+.active-filter:hover {
+
+  transform: scale(1.08) translateY(-2px);
+
+}
+
+
+.strength-filters button.active-filter,
+.strength-all button.active-filter {
+  color: #1fa463 !important;
+}
+
+/* "Alle Øvelser" Container */
+.strength-all {
+
+  display: flex;
+
+  justify-content: center;
+
+  margin-bottom: 12px;
+
+}
+
+
+/* "Alle Øvelser" Button */
+.strength-all button {
+
+  width: auto;
+
+  min-width: 140px;
+
+  padding: 10px 22px;
+
+  margin-top: 0;
+
+  border-radius: 999px;
+
+  font-size: 13px;
+
+  font-weight: 600;
+
+}
+
+/* Hover States */
+.strength-filters button:hover,
+.strength-all button:hover {
+
+  transform: translateY(-2px);
+
+  border-color: rgba(31,164,99,0.35);
+
+  box-shadow:
+    0 10px 20px rgba(0,0,0,0.3);
+
+}
+
+/* ===================================================
+   PAGE TRANSITIONS
+=================================================== */
+
+#category {
+  animation: exerciseFade 0.25s ease;
+}
+
+
+#exercise {
+
+  transition: 
+     opacity 0.3s ease;
+  animation: exerciseFade 0.35s ease;
+
+}
+
+/* ===================================================
+   ANIMATIONS
+=================================================== */
+
+@keyframes fadeButtons {
+  from {
+    opacity: 0;
+    transform: translateY(5px);
+  }
+
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
 
 @keyframes pulseGlow {
 
@@ -568,6 +1177,7 @@ animation: pulseGlow 2.5s infinite;
 
 }
 
+
 @keyframes progressGlow {
 
   from {
@@ -585,12 +1195,6 @@ animation: pulseGlow 2.5s infinite;
 }
 
 
-.start-workout-btn:hover::before {
-
-  left: 100%;
-
-}
-
 @keyframes progressShine {
 
   from {
@@ -603,19 +1207,6 @@ animation: pulseGlow 2.5s infinite;
 
 }
 
-
-
-#category {
-  animation: exerciseFade 0.25s ease;
-}
-
-#exercise {
-
-  transition: 
-     opacity 0.3s ease;
-  animation: exerciseFade 0.35s ease;
-
-}
 
 @keyframes exerciseFade {
 
@@ -632,85 +1223,6 @@ animation: pulseGlow 2.5s infinite;
 }
 
 
-.exercise-video:hover {
-
-  transform: translateY(-2px);
-
-  box-shadow:
-    0 16px 35px rgba(0,0,0,0.45),
-    0 0 18px rgba(31,164,99,0.2);
-
-}
-
-.exercise-badge {
-
-  display: inline-block;
-
-  padding: 6px 12px;
-
-  margin-bottom: 12px;
-
-  border-radius: 999px;
-
-  background: rgba(31,164,99,0.15);
-
-  border: 1px solid rgba(31,164,99,0.3);
-
-  color: #32d17a;
-
-  font-size: 13px;
-
-  font-weight: 600;
-
-}
-
-.exercise-tag {
-
-  padding: 6px 12px;
-
-  border-radius: 999px;
-
-  background: rgba(31,164,99,0.15);
-
-  border: 1px solid rgba(31,164,99,0.3);
-
-  color: #32d17a;
-
-  font-size: 10px;
-
-  font-weight: 500;
-  
-  transition: 
-     transform 0.2s ease,
-     box-shadow 0.2s ease;
-
-}
-
-
-.tag-container {
-
-  display: flex;
-
-  flex-wrap: wrap;
-
-  gap: 8px;
-
-  margin-bottom: 18px;
-
-}
-
-
-
-
-.exercise-tag:hover {
-
-  transform: translateY(-2px);
-
-  box-shadow:
-    0 0 12px rgba(31,164,99,0.3);
-
-}
-
 
 @keyframes cardFade {
 
@@ -725,7 +1237,6 @@ animation: pulseGlow 2.5s infinite;
   }
 
 }
-
 
 
 @keyframes titleReveal {
@@ -758,119 +1269,20 @@ animation: pulseGlow 2.5s infinite;
 }
 
 
-.strength-filters {
+/* ===================================================
+   RESPONSIVE
+=================================================== */
 
-  display: flex;
+@media (max-width: 500px) {
+  .hero {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: var(--hero-mobile-gap);
+  }
 
-  flex-wrap: wrap;
-
-  justify-content: center;
-
-  gap: 8px;
-
-  padding-bottom: 10px;
-
-  margin-bottom: 15px;
-
-}
-
-.strength-filters::-webkit-scrollbar {
-  display: none;
-}
-
-.strength-filters button,
-.strength-all button {
-
-  width: auto;
-
-  margin-top: 0;
-
-  padding: 10px 16px;
-
-  border-radius: 999px;
-
-  border: 1px solid rgba(255,255,255,0.12);
-
-  background: rgba(255,255,255,0.06);
-
-  backdrop-filter: blur(10px);
-
-  color: white;
-
-  font-size: 13px;
-
-  font-weight: 600;
-
-  box-shadow:
-    0 6px 14px rgba(0,0,0,0.2);
-
-  transition: all 0.25s ease;
-}
-
-.active-filter {
-
-  background: linear-gradient(
-    145deg,
-    #145236,
-    #11422c
-  );
-
-  border: 1px solid rgba(150,255,120,0.3);
-
-  color: white;
-
-  transform: scale(1.05);
-
-  box-shadow:
-    0 8px 20px rgba(0,0,0,0.45);
-
-}
-
-.active-filter:hover {
-
-  transform: scale(1.08) translateY(-2px);
-
-}
-
-
-.strength-all {
-
-  display: flex;
-
-  justify-content: center;
-
-  margin-bottom: 12px;
-
-}
-
-
-
-.strength-all button {
-
-  width: auto;
-
-  min-width: 140px;
-
-  padding: 10px 22px;
-
-  margin-top: 0;
-
-  border-radius: 999px;
-
-  font-size: 13px;
-
-  font-weight: 600;
-
-}
-
-.strength-filters button:hover,
-.strength-all button:hover {
-
-  transform: translateY(-2px);
-
-  border-color: rgba(31,164,99,0.35);
-
-  box-shadow:
-    0 10px 20px rgba(0,0,0,0.3);
-
+  .hero-img {
+    width: 100%;
+    max-width: var(--hero-mobile-max-width);
+    align-self: center;
+  }
 }
