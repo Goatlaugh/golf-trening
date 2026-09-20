@@ -1,18 +1,85 @@
+/* ===================================================
+		APP STATE
+=================================================== */
 
 let currentList = [];
 let currentIndex = 0;
 let currentScreen = "main";
 let activeStrengthFilter = "Alle";
+
 let timerInterval;
 let remainingTime = 0;
 let totalTime = 0;
 let timerRunning = false;
+
+let wakeLock = null;
+
+
+/* ===================================================
+		CONFIG
+=================================================== */
+
+const CONFIG = {
+
+  EXERCISE_FADE_DELAY: 150,
+
+  AUTO_START_DELAY: 3000,
+
+   TIMER: {
+
+ 	RED_WARNING: 5,
+  
+	ORANGE_WARNING: 10,
+	
+	RING_RADIUS: 65,
+
+    COLORS: {
+
+	BACKGROUND: "#333",
+
+	NORMAL: "#1fa463",
+    
+	WARNING: "#ff9900",
+    
+	DANGER: "#ff3333"
+  }
+},
+
+  IOS_SLEEP_PREVENTION: 20000
+
+};
+
+
+
+/* =============*==================================*==
+		HELPERS
+====================*============================== */
+
+const $ = id => document.getElementById(id);
+
 function resetTimerState() {
   clearInterval(timerInterval);
   timerRunning = false;
   remainingTime = 0;
   totalTime = 0;
 }
+
+function show(id) {
+
+	["main", "category", "exercise"]
+	  .forEach(screen => { 
+	    $(screen).classList.remove("active");
+  	});
+
+      $(id).classList.add("active");
+}
+
+
+/* ===================================================
+		CARD COMPONENTS
+=================================================== */
+
+
 function createExerciseCard(name, index) {
   return `
     <div class="card" onclick="openExercise(${index})">
@@ -21,6 +88,40 @@ function createExerciseCard(name, index) {
     </div>
   `;
 }
+
+function renderExerciseCards(exercises) {
+
+  let html = "";
+
+  exercises.forEach((e, i) => {
+    html += createExerciseCard(e.navn, i);
+  });
+
+  return html;
+
+}
+
+function renderList(title, items) {
+
+  if (!items) {
+    return "";
+  }
+
+  let html = `<b>${title}</b><ul>`;
+
+  items.forEach(item => {
+    html += `<li>${item}</li>`;
+  });
+
+  html += "</ul>";
+
+  return html;
+}
+
+
+/* ===================================================
+		STRENGTH FILTERS
+=================================================== */
 
 
 function createStrengthFilters() {
@@ -75,24 +176,84 @@ function createStrengthFilters() {
 }
 
 
-function renderList(title, items) {
+/* ===================================================
+		PAGE RENDERERS
+=================================================== */
 
-  if (!items) {
-    return "";
+
+function renderStrengthPage(exercises) {
+
+  let html = "<h2>STYRKE</h2>";
+
+  html += createStrengthFilters();
+
+  html += renderExerciseCards(exercises);
+
+  return html;
+
+}
+
+
+function renderCategoryPage(cat, exercises) {
+
+  let html = `<h2>${cat.toUpperCase()}</h2>`;
+
+  if (cat === "oppvarming") {
+
+    const totalSeconds = oppvarming.reduce(
+      (sum, exercise) =>
+        sum + (exercise.timer || 0),
+      0
+    );
+
+    const totalMinutes =
+      Math.floor(totalSeconds / 60);
+
+    html += `
+      <button
+        class="start-workout-btn"
+        onclick="startOppvarming()">
+
+        🔥 Start Oppvarming (${totalMinutes} min)
+
+      </button>
+    `;
   }
 
-  let html = `<b>${title}</b><ul>`;
+  if (cat === "styrke") {
+    html += createStrengthFilters();
+  }
 
-  items.forEach(item => {
-    html += `<li>${item}</li>`;
-  });
-
-  html += "</ul>";
+  html += renderExerciseCards(exercises);
 
   return html;
 }
 
 
+function renderExercise() {
+  const e = currentList[currentIndex];
+
+ const html = `
+  ${renderMedia(e)}
+  ${renderProgress()}
+  ${renderExerciseHeader(e)}
+  ${renderRepetition(e)}
+  ${renderExerciseDetails(e)}
+  ${renderFremgang(e)}
+  ${renderTags(e)}
+  ${renderTimer(e)}
+  ${renderVideoButton(e)}
+`;
+
+
+  $("exercise").innerHTML = html;
+  show("exercise");
+}
+
+
+/* ===================================================
+		MENU & CATEGORIES
+=================================================== */
 
 
 function createMenu() {
@@ -110,51 +271,29 @@ function createMenu() {
 
   });
 
-  document.getElementById("menu").innerHTML = html;
+  $("menu").innerHTML = html;
 }
+
 
 function openCategory(cat) {
-  const category = categories.find(c => c.id === cat);
 
-activeStrengthFilter = "Alle";
-currentList = category.data;
+  const category =
+    categories.find(c => c.id === cat);
+
+  activeStrengthFilter = "Alle";
+
+  currentList = category.data;
+
   currentScreen = "category";
 
+  $("category").innerHTML =
+    renderCategoryPage(
+      cat,
+      currentList
+    );
 
-  let html = "<h2>" + cat.toUpperCase() + "</h2>";
-
-if (cat === "oppvarming") {
-
-  const totalSeconds = oppvarming.reduce(
-    (sum, exercise) => sum + (exercise.timer || 0),
-    0
-  );
-
-  const totalMinutes = Math.floor(totalSeconds / 60);
-
-  html += `
-  <button class="start-workout-btn"
-          onclick="startOppvarming()">
-    🔥 Start Oppvarming (${totalMinutes} min)
-  </button>
-`;
-}
-
-
-if (cat === "styrke") {
-
-  html += createStrengthFilters();
-
-}
-
-
-
-  currentList.forEach((e, i) => {
-  html += createExerciseCard(e.navn, i);
-});
-
-  document.getElementById("category").innerHTML = html;
   show("category");
+
 }
 
 
@@ -162,34 +301,20 @@ function filterStrength(tag) {
 
   activeStrengthFilter = tag;
 
-  let exercises;
-
-  if (tag === "Alle") {
-
-    exercises = styrke;
-
-  } else {
-
-    exercises = styrke.filter(exercise =>
-      exercise.styrkeTag.includes(tag)
-    );
-
-  }
+  const exercises =
+    tag === "Alle"
+      ? styrke
+      : styrke.filter(exercise =>
+          exercise.styrkeTag.includes(tag)
+        );
 
   currentList = exercises;
 
-  let html = "<h2>STYRKE</h2>";
-
-  html += createStrengthFilters();
-
-  exercises.forEach((e, i) => {
-  html += createExerciseCard(e.navn, i);
-});
-
-
-  document.getElementById("category").innerHTML = html;
+  $("category").innerHTML =
+    renderStrengthPage(exercises);
 
 }
+
 
 function startOppvarming() {
 
@@ -197,116 +322,64 @@ function startOppvarming() {
 
 }
 
-function openExercise(i, autoStart = false) {
 
-  resetTimerState();
+/* ===================================================
+		EXERCISE COMPONENTS
+=================================================== */
 
-  keepScreenOn();
+function renderMedia(e) {
 
-  currentIndex = i;
-  currentScreen = "exercise";
+	if (e.videoFile) {
 
-const exercise = document.getElementById("exercise");
+ 	 return `
+	    <video
+	      id="exerciseVideo"
+	      autoplay
+	      loop
+	      muted
+	      playsinline
+	      preload="metadata"
+	      class="exercise-video">
 
-if (exercise) {
-  exercise.style.opacity = "0";
-}
+	      <source
+	        src="${e.videoFile}"
+	        type="video/mp4">
 
-  setTimeout(() => {
-
-  renderExercise();
-
-  const exercise =
-    document.getElementById("exercise");
-
-  if (exercise) {
-    exercise.style.opacity = "1";
-  }
-
-
-if (autoStart) {
-
-    const exercise = currentList[currentIndex];
-
-
-if (exercise.timer) {
-
-  const video = document.getElementById("exerciseVideo");
-
-
-if (video) {
-
-  video.addEventListener("loadedmetadata", () => {
-
-  setTimeout(() => {
-    startTimer(exercise.timer);
-  }, exercise.autoStartDelay || 3000);
-
-}, { once: true });
-
-  } else {
-
-    setTimeout(() => {
-      startTimer(exercise.timer);
-    }, exercise.autoStartDelay || 3000);
-
-  	    }
-
-	   }
-
-  	  }
-
-
-	 }, 150);
-
-	}
-
-function renderExercise() {
-  let e = currentList[currentIndex];
-
-  let html = "";
-
-  if (e.videoFile) {
-
-  html += `
-    <video
-      id="exerciseVideo"
-      autoplay
-      loop
-      muted
-      playsinline
-      preload="metadata"
-      class="exercise-video">
-
-      <source
-        src="${e.videoFile}"
-        type="video/mp4">
-
-    </video>
+	      </video>
  
   `;
 
 }
-else if (e.bilde) {
+	if (e.bilde) {
 
-  html += `<img src="${e.bilde}">`;
-
-
-
+	return `<img src="${e.bilde}">`;
+	}
+	return "";
 }
 
-  html += '<div class="progress-bar">' +
-          getProgressBar() +
-        '</div>';
 
-html += "<h1>" + e.navn + "</h1>";
-  if (e.tid) {
-  html += "<h2>" + e.tid + "</h2>";
+function renderRepetition(e) {
+
+  if (!e.repetisjon) {
+    return "";
+  }
+
+  return `
+    <b>Repetisjon:</b>
+    <div class="exercise-repetisjon">
+      ${e.repetisjon}
+    </div>
+  `;
 }
 
-if (e.styrkeTag) {
 
-  html += '<div class="tag-container">';
+function renderTags(e) {
+
+  if (!e.styrkeTag) {
+    return "";
+  }
+
+  let html = '<div class="tag-container">';
 
   e.styrkeTag.forEach(tag => {
 
@@ -320,88 +393,85 @@ if (e.styrkeTag) {
 
   html += "</div>";
 
-}
-
-
-html += renderList(
-  "Muskelgruppe:",
-  e.muskelgruppe
-);
-
-if (e.repetisjon) {
-
-  html += "<b>Repetisjon:</b>";
-
-  html += "<div>" + e.repetisjon + "</div>";
+  return html;
 
 }
 
-html += renderList(
-  "Utstyr:",
-  e.utstyr
-);
+function renderFremgang(e) {
 
+  if (!e.fremgang) {
+    return "";
+  }
 
-
-html += renderList(
-  "Fokus:",
-  e.fokus
-);
-
-
-html += renderList(
-  "Sjekkpunkter:",
-  e.sjekkpunkter
-);
-
-
-if (e.fremgang) {
-  html += "<b>Fremgangsmåte:</b>";
+  let html = "<b>Fremgangsmåte:</b>";
 
   e.fremgang.forEach(f => {
 
     if (f.startsWith("Steg")) {
 
-  let deler = f.split(":");
-  let steg = deler[0] + ":";
-  let tekst = deler.slice(1).join(":");
+      const deler = f.split(":");
+      const steg = deler[0] + ":";
+      const tekst = deler.slice(1).join(":");
 
-  html += "<div class='fremgang-linje'><strong>" + steg + "</strong>" + tekst + "</div>";
+      html += `
+        <div class="fremgang-linje">
+          <strong>${steg}</strong>
+          ${tekst}
+        </div>
+      `;
 
-} else {
-  html += "<div class='fremgang-linje'>" + f + "</div>";
-}
+    } else {
+
+      html += `
+        <div class="fremgang-linje">
+          ${f}
+        </div>
+      `;
+
+    }
 
   });
+
+  return html;
+
 }
 
-if (e.timer) {
-  html += `
+
+function renderTimer(e) {
+
+  if (!e.timer) {
+    return "";
+  }
+
+const circumference =
+2 * Math.PI * CONFIG.TIMER.RING_RADIUS;
+
+  return `
     <div style="display:flex;justify-content:center;margin:20px 0;">
 
       <svg width="160" height="160">
 
-<circle
-  cx="80"
-  cy="80"
-  r="65"
-  stroke="#333"
-  stroke-width="10"
-  fill="none"
-/>
+        <circle
+          cx="80"
+          cy="80"
+          r="${CONFIG.TIMER.RING_RADIUS}"
+          stroke="${CONFIG.TIMER.COLORS.BACKGROUND}"
+          stroke-width="10"
+          fill="none"
+        />
 
-<circle
-  id="progressRing"
-  cx="80"
-  cy="80"
-  r="65"
-  stroke="#1fa463"
-  stroke-width="10"
-  fill="none"
-  stroke-linecap="round"
-  stroke-dasharray="408"
-  transform="rotate(-90 80 80)"
-/>
+        <circle
+          id="progressRing"
+          cx="80"
+          cy="80"
+          r="${CONFIG.TIMER.RING_RADIUS}"
+          stroke="${CONFIG.TIMER.COLORS.NORMAL}"
+          stroke-width="10"
+          fill="none"
+          stroke-linecap="round"
+          stroke-dasharray="${circumference}"
+          transform="rotate(-90 80 80)"
+        />
 
         <text
           id="timerDisplay"
@@ -418,23 +488,139 @@ if (e.timer) {
 
     </div>
 
-   <div class="timer-controls">
+    <div class="timer-controls">
 
-  <div id="timerButtons" class="timer-buttons">
-  <button onclick="startTimer(${e.timer})">▶️ Start</button>
-  <button onclick="resetTimer(${e.timer})">🔄 Reset</button>
-</div>
+      <div id="timerButtons" class="timer-buttons">
+        <button onclick="startTimer(${e.timer})">
+          ▶️ Start
+        </button>
+        <button onclick="resetTimer(${e.timer})">
+          🔄 Reset
+        </button>
+      </div>
 
+    </div>
   `;
 }
 
-  if (e.video) {
-    html += '<button onclick="window.open(\'' + e.video + '\')">▶ Se video</button>';
+
+function renderVideoButton(e) {
+
+  if (!e.video) {
+    return "";
   }
 
-  document.getElementById("exercise").innerHTML = html;
-  show("exercise");
+  return `
+    <button onclick="window.open('${e.video}')">
+      ▶ Se video
+    </button>
+  `;
 }
+
+function renderExerciseDetails(e) {
+
+  return (
+    renderList("Muskelgruppe:", e.muskelgruppe) +
+    renderList("Utstyr:", e.utstyr) +
+    renderList("Fokus:", e.fokus) +
+    renderList("Sjekkpunkter:", e.sjekkpunkter)
+  );
+
+}
+
+function renderProgress() {
+
+  return `
+    <div class="progress-bar">
+      ${getProgressBar()}
+    </div>
+  `;
+
+}
+
+
+function renderExerciseHeader(e) {
+
+  let html = `<h1>${e.navn}</h1>`;
+
+  if (e.tid) {
+    html += `<h2>${e.tid}</h2>`;
+  }
+
+  return html;
+
+}
+
+/* ===================================================
+		EXERCISE NAVIGATION
+=================================================== */
+
+
+function openExercise(i, autoStart = false) {
+
+  resetTimerState();
+
+  keepScreenOn();
+
+  currentIndex = i;
+  currentScreen = "exercise";
+
+const exercise = $("exercise");
+
+if (exercise) {
+  exercise.style.opacity = "0";
+}
+
+  setTimeout(() => {
+
+  renderExercise();
+
+  const exercise = $("exercise");
+
+  if (exercise) {
+    exercise.style.opacity = "1";
+  }
+
+
+if (autoStart) {
+
+    const exercise = currentList[currentIndex];
+
+
+if (exercise.timer) {
+
+  const video = $("exerciseVideo");
+
+
+if (video) {
+
+  video.addEventListener("loadedmetadata", () => {
+
+  setTimeout(() => {
+    startTimer(exercise.timer);
+  }, exercise.autoStartDelay ||
+	CONFIG.AUTO_START_DELAY);
+}, 
+	{ once: true });
+
+  } else {
+
+    setTimeout(() => {
+      startTimer(exercise.timer);
+    }, exercise.autoStartDelay ||
+	CONFIG.AUTO_START_DELAY);
+
+  	    }
+
+	   }
+
+  	  }
+
+
+	 }, CONFIG.EXERCISE_FADE_DELAY);
+
+	}
+
 
 function goBack() {
   if (currentScreen === "exercise") {
@@ -451,11 +637,13 @@ else {
   }
 }
 
+
 function goNext() {
   if (currentScreen === "exercise" && currentIndex < currentList.length - 1) {
     openExercise(currentIndex + 1);
   }
 }
+
 
 function goMenu() {
 
@@ -465,13 +653,12 @@ function goMenu() {
   currentScreen = "main";
 }
 
-function show(id) {
-  document.getElementById("main").classList.remove("active");
-  document.getElementById("category").classList.remove("active");
-  document.getElementById("exercise").classList.remove("active");
 
-  document.getElementById(id).classList.add("active");
-}
+
+/* ===================================================
+		TIMER MODULE
+=================================================== */
+
 
 function startTimer(seconds) {
 
@@ -503,8 +690,7 @@ updateTimerButtons(seconds);
 
 updateTimerButtons(totalTime);
 
-document.getElementById("timerDisplay").innerHTML =
-  "✅ Ferdig!";
+$("timerDisplay").innerHTML = "✅ Ferdig!";
 
 
   const currentExercise = currentList[currentIndex];
@@ -529,6 +715,7 @@ document.getElementById("timerDisplay").innerHTML =
   }
 }
 
+
 function pauseTimer() {
 
   clearInterval(timerInterval);
@@ -538,6 +725,7 @@ function pauseTimer() {
   updateTimerButtons(remainingTime);
 
 }
+
 
 function resetTimer(seconds) {
 
@@ -557,10 +745,10 @@ function updateTimerDisplay() {
   let minutes = Math.floor(remainingTime / 60);
   let seconds = remainingTime % 60;
 
-  document.getElementById("timerDisplay").innerHTML =
+  $("timerDisplay").innerHTML =
     minutes + ":" + String(seconds).padStart(2, "0");
 
-  const ring = document.getElementById("progressRing");
+  const ring = $("progressRing");
 
 if (ring) {
   ring.style.transition = "stroke-dashoffset 1s linear";
@@ -568,8 +756,9 @@ if (ring) {
 
   if (ring && totalTime > 0) {
 
-    const radius = 65;
-    const circumference = 2 * Math.PI * radius;
+    const radius =
+	CONFIG.TIMER.RING_RADIUS;
+    const circumference = 2 * Math.PI * CONFIG.TIMER.RING_RADIUS;
 
     const progress = remainingTime / totalTime;
 
@@ -579,18 +768,21 @@ if (ring) {
 
     ring.style.strokeDashoffset =
       circumference * (1 - progress);
-if (remainingTime <= 5) {
-  ring.style.stroke = "#ff3333";
+if (remainingTime <= CONFIG.TIMER.RED_WARNING) 
+{
+  ring.style.stroke = CONFIG.TIMER.COLORS.DANGER;
 }
-else if (remainingTime <= 10) {
-  ring.style.stroke = "#ff9900";
+else if ( remainingTime <= CONFIG.TIMER.ORANGE_WARNING) 
+{
+  ring.style.stroke = CONFIG.TIMER.COLORS.WARNING;
 }
 else {
-  ring.style.stroke = "#1fa463";
+  ring.style.stroke = CONFIG.TIMER.COLORS.NORMAL;
 }
 
   }
 }
+
 
 function updateTimerButtons(seconds) {
 
@@ -612,16 +804,22 @@ function updateTimerButtons(seconds) {
 
   }
 
-  document.getElementById("timerButtons").innerHTML = html;
+  $("timerButtons").innerHTML = html;
 }
 
 
+
+
+/* ===================================================
+		PROGRESS MODULE
+=================================================== */
+
 function getProgressBar() {
 
-  let total = currentList.length;
-  let current = currentIndex + 1;
+  const total = currentList.length;
+  const current = currentIndex + 1;
 
-  let percentage = Math.round((current / total) * 100);
+  const percentage = Math.round((current / total) * 100);
 
   return `
     <div class="progress-title">Progress</div>
@@ -640,7 +838,11 @@ function getProgressBar() {
 }
 
 
-let wakeLock = null;
+
+/* ===================================================
+		WAKE LOCK MODULE
+=================================================== */
+
 
 async function keepScreenOn() {
   try {
@@ -655,6 +857,24 @@ async function keepScreenOn() {
   }
 }
 
+// Fallback for iOS
+function preventSleepiOS() {
+  setInterval(() => {
+    // Liten usynlig scroll som holder skjermen aktiv
+    window.scrollBy(0, 1);
+    window.scrollBy(0, -1);
+  }, CONFIG.IOS_SLEEP_PREVENTION);
+}
+
+
+
+
+
+/* ===================================================
+		APP STARTUP
+=================================================== */
+
+
 // Aktiver når siden lastes
 document.addEventListener("DOMContentLoaded", () => {
   createMenu();
@@ -668,17 +888,10 @@ document.addEventListener("visibilitychange", () => {
   }
 });
 
-
-
-// Fallback for iOS
-function preventSleepiOS() {
-  setInterval(() => {
-    // Liten usynlig scroll som holder skjermen aktiv
-    window.scrollBy(0, 1);
-    window.scrollBy(0, -1);
-  }, 20000); // hvert 20. sekund
-}
-
 preventSleepiOS();
+
+
+
+
 
 
