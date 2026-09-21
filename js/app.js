@@ -82,26 +82,6 @@ function vibrate(pattern = [300, 200, 300]) {
 
 }
 
-function testVibration() {
-
-  console.log("Testing vibration...");
-
-  if ("vibrate" in navigator) {
-
-    navigator.vibrate(1000);
-
-    console.log("✅ Vibrate supported");
-
-  } else {
-
-    console.log("❌ Vibrate NOT supported");
-
-    alert("Vibration not supported on this device/browser");
-
-  }
-
-}
-
 
 /* ===================================================
 		CARD COMPONENTS
@@ -518,20 +498,16 @@ const circumference =
 
     <div class="timer-controls">
 
-  <div id="timerButtons" class="timer-buttons">
-    <button onclick="startTimer(${e.timer})">
-      ▶️ Start
-    </button>
-    <button onclick="resetTimer(${e.timer})">
-      🔄 Reset
-    </button>
-  </div>
+      <div id="timerButtons" class="timer-buttons">
+        <button onclick="startTimer(${e.timer})">
+          ▶️ Start
+        </button>
+        <button onclick="resetTimer(${e.timer})">
+          🔄 Reset
+        </button>
+      </div>
 
-  <button onclick="testVibration()">
-    📳 Test Vibrasjon
-  </button>
-
-</div>
+    </div>
   `;
 }
 
