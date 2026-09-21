@@ -74,6 +74,14 @@ function show(id) {
       $(id).classList.add("active");
 }
 
+function vibrate(pattern = [300, 200, 300]) {
+
+  if ("vibrate" in navigator) {
+    navigator.vibrate(pattern);
+  }
+
+}
+
 
 /* ===================================================
 		CARD COMPONENTS
@@ -692,10 +700,14 @@ updateTimerButtons(totalTime);
 
 $("timerDisplay").innerHTML = "✅ Ferdig!";
 
+  vibrate([500, 200, 500]);
+
 
   const currentExercise = currentList[currentIndex];
 
   if (currentExercise && currentExercise.autoNext) {
+
+	vibrate([500, 200, 500]);
 
     setTimeout(() => {
 
