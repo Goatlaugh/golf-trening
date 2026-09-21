@@ -332,7 +332,7 @@ Load the file in index.html
 Example:
 
 ```html
-data/mobility.jsscript>
+<script src="data/example.js"> </script>
 ```
 
 IMPORTANT:
@@ -347,7 +347,7 @@ The script must be loaded before:
 Example:
 
 ```html
-data/mobility.jsscript>
+<script src="data/example.js"> </script>
 
 <script src="category.js"></script>
 
@@ -370,9 +370,9 @@ Example:
 
 ```js
 {
-  id: "mobility",
-  navn: "Mobility",
-  data: mobility
+  id: "example",
+  navn: "Example",
+  data: example
 }
 ```
 
