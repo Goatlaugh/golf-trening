@@ -1,7 +1,7 @@
 const bunker = [
 
 {navn:"Streken - Bunker", 
-tid:"Tid: 15 min",
+tid:"Tid: 5 min",
 fokus:["Treff sanden samme sted","Konsistent kontakt"],
 fremgang:[
 "Lag en strek i sanden hvor man ønsker å treffe sanden",
@@ -17,7 +17,7 @@ bilde:"images/exercises/bunker/streken.jpg"
 },
 
 {navn:"iPhone drill", 
-tid:"Tid: 20 min",
+tid:"Tid: 15 min",
 fokus:["Stabil kropp","Kontrollert køllebane"],
 fremgang:[
 "Tegn en firkant med størrelse av en IPhone i sanden",
