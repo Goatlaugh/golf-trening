@@ -14,6 +14,8 @@ let timerRunning = false;
 
 let wakeLock = null;
 
+let newPersonalBest = false;
+
 
 /* ===================================================
 		CONFIG
@@ -81,6 +83,8 @@ function vibrate(pattern = [300, 200, 300]) {
   }
 
 }
+
+
 
 
 /* ===================================================
@@ -250,6 +254,7 @@ function renderExercise() {
   ${renderFremgang(e)}
   ${renderTags(e)}
   ${renderTimer(e)}
+  ${renderScorecardButton(e)}
   ${renderVideoButton(e)}
 `;
 
@@ -455,7 +460,7 @@ const circumference =
 2 * Math.PI * CONFIG.TIMER.RING_RADIUS;
 
   return `
-    <div style="display:flex;justify-content:center;margin:20px 0;">
+    <div class="timer-container">
 
       <svg width="160" height="160">
 
@@ -524,6 +529,28 @@ function renderVideoButton(e) {
     </button>
   `;
 }
+
+function renderScorecardButton(e) {
+
+  if (e.navn !== "Sko Leken") {
+    return "";
+  }
+
+  return `
+    <div class="scorecard-btn-container">
+
+      <button
+        class="scorecard-btn"
+        onclick="openSkoLekenScorecard()">
+
+        📊 Scorekort
+
+      </button>
+
+    </div>
+  `;
+}
+
 
 function renderExerciseDetails(e) {
 
@@ -661,6 +688,686 @@ function goMenu() {
   currentScreen = "main";
 }
 
+
+/* ===================================================
+        MODAL MODULE
+=================================================== */
+
+function openModal(content) {
+
+  $("modalContent").innerHTML = content;
+
+  $("modalOverlay").classList.add("active");
+
+}
+
+function closeModal() {
+
+  $("modalOverlay").classList.remove("active");
+
+  $("modalContent").innerHTML = "";
+
+}
+
+
+/* ===================================================
+        CONFIRMATION MODAL
+=================================================== */
+
+let confirmAction = null;
+let previousModalContent = "";
+
+function openConfirmModal(
+  title,
+  message,
+  onConfirm
+) {
+
+  previousModalContent =
+    $("modalContent").innerHTML;
+
+  confirmAction = onConfirm;
+
+  openModal(`
+
+    <h2>${title}</h2>
+
+    <p>${message}</p>
+
+    <div class="confirm-actions">
+
+      <button
+        class="confirm-btn"
+        onclick="executeConfirmAction()">
+
+        ✅ Bekreft
+
+      </button>
+
+      <button
+        class="cancel-btn"
+        onclick="restorePreviousModal()">
+
+        ❌ Avbryt
+
+      </button>
+
+    </div>
+
+  `);
+
+}
+
+function executeConfirmAction() {
+
+  const action = confirmAction;
+
+  confirmAction = null;
+
+  if (action) {
+
+    action();
+
+  }
+
+}
+
+
+
+function restorePreviousModal() {
+
+  $("modalContent").innerHTML =
+    previousModalContent;
+
+}
+
+
+/* ===================================================
+        SCORE CARD MODULE
+=================================================== */
+
+
+function openSkoLekenScorecard() {
+
+ const pb =
+	getPersonalBest("Sko Leken");
+
+  const html = `
+
+    <h2>Sko Leken</h2>
+
+    ${renderPersonalBestBadge()}
+
+    <div class="scorecard-best">
+
+ 	 🏆 Personlig rekord
+
+     <div>
+
+	${pb !== null ? `${pb} 👟` : "Ingen score enda"}
+
+    </div>
+
+</div>
+
+    <div class="scorecard-input">
+
+      <label>Fot fra hullet</label>
+
+      <input
+        type="number"
+        id="skoLekenScore"
+        min="0"
+        placeholder="Skriv score"
+      >
+
+    </div>
+
+    <div class="score-actions">
+
+  	<button onclick="saveSkoLekenScore()">
+	    💾 Lagre
+	</button>
+
+	  <button onclick="undoLastScore()">
+	    ↩️ Angre
+	  </button>
+
+	  <button onclick="clearScoreHistory()">
+	    🗑️ Tøm historikk
+	  </button>
+
+    </div>
+
+${renderScoreHistory("Sko Leken")}
+${renderStatistics("Sko Leken")}
+
+    <button onclick="closeModal()">
+
+      ✖ Lukk
+
+    </button>
+
+  `;
+
+  openModal(html);
+
+if (newPersonalBest) {
+
+  setTimeout(() => {
+
+    newPersonalBest = false;
+
+  }, 4000);
+
+}
+}
+
+
+
+function renderPersonalBestBadge() {
+
+  if (!newPersonalBest) {
+    return "";
+  }
+
+  return `
+    <div class="new-pb-badge">
+
+      🏆 NY PERSONLIG REKORD!
+
+    </div>
+  `;
+
+}
+
+
+function renderScoreHistory(exerciseName) {
+
+  const scores =
+    getScores(exerciseName);
+
+  if (scores.length === 0) {
+
+    return `
+      <div>
+        Ingen tidligere forsøk
+      </div>
+    `;
+
+  }
+
+  let html =
+    "<h3>Siste 5 forsøk</h3>";
+
+  scores.forEach(
+  (score, index) => {
+
+    const nextScore =
+      scores[index + 1];
+
+    html += `
+      <div class="score-row">
+
+        ${score} 👟
+
+        ${getScoreChange(
+          score,
+          nextScore
+        )}
+
+      </div>
+    `;
+
+  }
+);
+
+  return html;
+
+}
+
+function renderStatistics(
+  exerciseName
+) {
+
+  const average =
+    getAverageScore(
+      exerciseName
+    );
+
+  const last =
+    getLastScore(
+      exerciseName
+    );
+
+  const attempts =
+    getAttemptCount(
+      exerciseName
+    );
+
+  return `
+
+    <h3>Statistikk</h3>
+
+    <div class="score-row">
+      Gjennomsnitt:
+      ${average} 👟
+    </div>
+
+    <div class="score-row">
+      Siste score:
+      ${last} 👟
+    </div>
+
+    <div class="score-row">
+      Antall forsøk:
+      ${attempts}
+    </div>
+
+  `;
+
+}
+
+
+
+function showConfetti() {
+
+  const overlay =
+    document.createElement("div");
+
+  overlay.className =
+    "confetti-overlay";
+
+  document.body.appendChild(
+    overlay
+  );
+
+  for (let i = 0; i < 500; i++) {
+
+    const piece =
+      document.createElement("div");
+
+    piece.className =
+	"confetti-piece";
+
+	const size =
+	  6 + Math.random() * 12;
+
+	piece.style.width =
+	  size + "px";
+
+	piece.style.height =
+	  size + "px";
+
+    piece.style.left =
+      Math.random() * 100 + "%";
+
+    piece.style.setProperty(
+  	"--drift",
+  	`${Math.random() * 300 - 150}px`
+	);
+
+    piece.style.animationDelay =
+      Math.random() * 0.8 + "s";
+
+    piece.style.animationDuration =
+      (2 + Math.random() * 3) + "s";
+
+    piece.style.background =
+      [
+        "#1fa463",
+        "#32d17a",
+        "#ffd700",
+        "#ff9900",
+        "#ffffff"
+      ][Math.floor(Math.random() * 5)];
+
+    overlay.appendChild(piece);
+
+  }
+
+  setTimeout(() => {
+
+    overlay.remove();
+
+  }, 5500);
+
+}
+
+
+
+
+function saveSkoLekenScore() {
+
+  const input =
+    $("skoLekenScore");
+
+  const score =
+    Number(input.value);
+
+    const isPB =
+  isNewPersonalBest(
+    "Sko Leken",
+    score
+  );
+
+
+  if (!score) {
+
+    alert("Skriv inn en score");
+
+    return;
+
+  }
+
+ 
+
+  const history =
+  getFullHistory(
+    "Sko Leken"
+  );
+
+  history.unshift(score);
+
+  const scores =
+  history.slice(0, 5);
+
+
+  localStorage.setItem(
+  	"Sko Leken",
+  JSON.stringify(scores)
+);
+
+localStorage.setItem(
+  "Sko Leken History",
+  JSON.stringify(history)
+);
+
+
+newPersonalBest = isPB;
+
+if (isPB) {
+
+  showConfetti();
+
+}
+
+
+openSkoLekenScorecard();
+
+}
+
+function undoLastScore() {
+
+  const history =
+    getFullHistory("Sko Leken");
+
+
+  if (!history.length) {
+
+    alert("Ingen score å angre");
+
+    return;
+
+  }
+
+  openConfirmModal(
+
+  "Angre score",
+
+  "Vil du fjerne siste registrerte score?",
+
+  () => {
+
+  history.shift();
+
+  const updatedScores =
+  history.slice(0, 5);
+
+  localStorage.setItem(
+  "Sko Leken",
+  JSON.stringify(updatedScores)
+  );
+
+  localStorage.setItem(
+  "Sko Leken History",
+  JSON.stringify(history)
+  );
+
+
+  openSkoLekenScorecard();
+
+}
+
+);
+
+return;
+
+  history.shift();
+
+  newPersonalBest = false;
+
+  const updatedScores =
+  history.slice(0, 5);
+
+
+  localStorage.setItem(
+    "Sko Leken",
+    JSON.stringify(updatedScores)
+  );
+
+  localStorage.setItem(
+    "Sko Leken History",
+    JSON.stringify(history)
+  );
+
+  openSkoLekenScorecard();
+
+}
+
+function clearScoreHistory() {
+
+  const history =
+  getFullHistory("Sko Leken");
+
+  const scores =
+  getScores("Sko Leken");
+
+  if (
+  !history.length &&
+  !scores.length
+  ) {
+
+  alert("Ingen historikk å slette");
+
+  return;
+
+}
+
+  openConfirmModal(
+
+  "Slett historikk",
+
+  "Dette vil fjerne alle lagrede resultater. Er du sikker?",
+
+  () => {
+
+  localStorage.removeItem(
+    "Sko Leken"
+  );
+
+  localStorage.removeItem(
+    "Sko Leken History"
+  );
+
+  localStorage.removeItem(
+    "Sko Leken PB"
+  );
+
+  openSkoLekenScorecard();
+
+}
+
+);
+
+return;
+
+  localStorage.removeItem(
+    "Sko Leken"
+  );
+
+  localStorage.removeItem(
+    "Sko Leken History"
+  );
+
+  newPersonalBest = false;
+
+  openSkoLekenScorecard();
+
+}
+
+
+
+
+
+function getScores(exerciseName) {
+  return JSON.parse(
+    localStorage.getItem(exerciseName)
+  ) || [];
+}
+
+function getFullHistory(exerciseName) {
+
+  return JSON.parse(
+    localStorage.getItem(
+      `${exerciseName} History`
+    )
+  ) || [];
+
+}
+
+
+
+function getPersonalBest(
+  exerciseName
+) {
+
+  const history =
+    getFullHistory(exerciseName);
+
+  if (!history.length) {
+    return null;
+  }
+
+  return Math.max(...history);
+
+}
+
+function isNewPersonalBest(
+  exerciseName,
+  score
+) {
+
+  const history =
+    getFullHistory(exerciseName);
+
+  if (!history.length) {
+    return true;
+  }
+
+  return score >
+    Math.max(...history);
+
+}
+
+
+
+function getAverageScore(
+  exerciseName
+) {
+
+  const scores =
+    getFullHistory(exerciseName);
+
+  if (!scores.length) {
+    return 0;
+  }
+
+  const sum =
+    scores.reduce(
+      (a, b) => a + b,
+      0
+    );
+
+  return Math.round(
+    sum / scores.length
+  );
+
+}
+
+function getLastScore(exerciseName) {
+
+  const history =
+    getFullHistory(exerciseName);
+
+  return history[0] || 0;
+
+}
+
+function getAttemptCount(
+  exerciseName
+) {
+
+  return getFullHistory(
+    exerciseName
+  ).length;
+
+}
+
+
+
+
+function getScoreChange(
+  currentScore,
+  previousScore
+) {
+
+  if (
+    previousScore === undefined
+  ) {
+    return "";
+  }
+
+  const diff =
+    currentScore - previousScore;
+
+  if (diff > 0) {
+
+    return `
+      <span class="score-up">
+        🟢 +${diff}
+      </span>
+    `;
+
+  }
+
+  if (diff < 0) {
+
+    return `
+      <span class="score-down">
+        🔴 ${diff}
+      </span>
+    `;
+
+  }
+
+  return `
+    <span class="score-equal">
+      ⚪ 0
+    </span>
+  `;
+
+}
 
 
 /* ===================================================
@@ -889,19 +1596,29 @@ function preventSleepiOS() {
 document.addEventListener("DOMContentLoaded", () => {
   createMenu();
   keepScreenOn();
+
+  
 });
 
+
 // Re-aktiver hvis bruker går tilbake til siden
+
 document.addEventListener("visibilitychange", () => {
-  if (wakeLock !== null && document.visibilityState === "visible") {
+
+  if (
+	wakeLock !== null && 
+	document.visibilityState === "visible"
+	) {
     keepScreenOn();
   }
 });
 
+document.addEventListener("click", e => {
+
+  if (e.target.id === "modalOverlay") {
+    closeModal();
+  }
+
+});
+
 preventSleepiOS();
-
-
-
-
-
-
