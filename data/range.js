@@ -1,7 +1,7 @@
 const range = [
 
 {navn:"Grep", 
-tid:"Tid: 1 min",
+tid:"Tid: 30sec",
 fokus:["Riktig grep","Stabil base"],
 sjekkpunkter:[
 "Ut i fingrene (der hvor bæreposen ligger)",
@@ -14,7 +14,7 @@ bilde:"images/exercises/range/grep.jpg"
 },
 
 {navn:"Halvsving - L til L og Y til L", 
-tid:"Tid: 3 min",
+tid:"Tid: 1 min",
 fokus:["Riktig posisjon","God balanse"],
 fremgang:[
 "Tren svingen med å starte med små bevegelser og øke svinglengden.",
@@ -27,14 +27,14 @@ bilde:"images/exercises/range/halvsving.jpg"
 },
 
 {navn:"Sving tauet", 
-tid:"Tid: 3 min",
+tid:"Tid: 1 min",
 fokus:["Riktig tempo","God sekvens"],
 video:"https://ovelsesbank.golfforbundet.no/ovelser/alle-ovelser/sving-tauet",
 bilde:"images/exercises/range/tau.jpg"
 },
 
 {navn:"Fleetwood - paraplyfinish", 
-tid:"Tid: 2 min",
+tid:"Tid: 1 min",
 fokus:["Stabil finish","God balanse"],
 video:"https://ovelsesbank.golfforbundet.no/ovelser/alle-ovelser/fleetwood-paraplyfinish",
 bilde:"images/exercises/range/finish.jpg"
@@ -53,7 +53,7 @@ bilde:"images/exercises/range/enfot.jpg"
 },
 
 {navn:"Take-away med bøtte / ballong", 
-tid:"Tid: 10 min",
+tid:"Tid: 5 min",
 fokus:["Riktig start","Rett køllebane"],
 fremgang:[
 "Plasser bøtta mellom underarmene og utfør en take-away",
@@ -77,7 +77,7 @@ bilde:"images/exercises/range/baksving.jpg"
 tid:"Tid: 15 min",
 fokus:["Treff ball først","Riktig lavpunkt"],
 fremgang:[
-"I denne øvelsen legger utøveren en handduk ca. to køllehoder før ballen",
+"I denne øvelsen legger utøveren et håndkle ca. to køllehoder før ballen",
 "Deretter er oppgaven å slå baller, uten at køllehodet treffer handduken",
 "Utføres dette riktig vil utøveren slå ned på ballen, noe som er en forutsetning for et godt balltreff uten pegg"
 ],
