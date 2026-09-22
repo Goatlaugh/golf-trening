@@ -1,7 +1,7 @@
 const putting = [
 
 {navn:"Pegg til pegg", 
-tid:"Tid: 10 min",
+tid:"Tid: 2 min",
 fokus:["Kontroller tempo","Treff riktig linje"],
 fremgang:[
 "Hensikten med øvelsen er å skape en god rytme i puttebevegelsen",
@@ -14,7 +14,7 @@ bilde:"images/exercises/putting/pegg_putting.jpg"
 },
 
 {navn:"Sko Leken", 
-tid:"Tid: 30 min",
+tid:"Tid: 15 min",
 fokus:["Stabil stroke","Presisjon på kort hold"],
 fremgang:[
 "Starter en fot fra hullet og markerer området med en pegg.",
@@ -25,8 +25,8 @@ fremgang:[
 "1 treff → samme sted",
 "0 treff → nærmere med en fot"
 ],
-video:"https://ovelsesbank.golfforbundet.no/ovelser/alle-ovelser/foten",
-bilde:"images/exercises/putting/skole.jpg"
+bilde:"images/exercises/putting/skole.jpg",
+timer: 900
 }
 
 ];
