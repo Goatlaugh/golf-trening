@@ -1,14 +1,13 @@
 const chipping = [
 
 {navn:"Chip/pitch med rangebøtte", 
-tid:"Tid: 5 min",
+tid:"Tid: 1 min",
 fokus:["Treff landingspunkt","Kontroller lengde"],
 fremgang:[
 "En øvelse for å koble hender og kropp sammen i chip/pitch-slaget",
 "Plasser en rangebøtte/ballong mellom underarmene og slå chipper samtidig som bøtten holder seg mellom underarmene"
 ],
-video:"https://ovelsesbank.golfforbundet.no/ovelser/alle-ovelser/chip-pitch-med-rangebotte",
-bilde:"images/exercises/chipping/rangebøtte.jpg"
+videoFile:"images/videos/chipping/rangebøtte.mp4"
 },
 
 {navn:"Chippe med åpent blad", 
@@ -22,8 +21,7 @@ fremgang:[
 "2. Åpent blad i oppstillingen",
 "3. Åpent blad i baksvingen (køllen peker rett opp)"
 ],
-video:"https://ovelsesbank.golfforbundet.no/ovelser/alle-ovelser/chippe-med-apent-blad",
-bilde:"images/exercises/chipping/apent.jpg"
+videoFile:"images/videos/chipping/apent.mp4"
 },
 
 {navn:"Planken - Chipping", 
@@ -37,12 +35,11 @@ fremgang:[
 "NB: Det kan være lurt å benytte noe som ikke oppleves skummelt å treffe",
 "Derfor er pappeske ofte foretrukket over en planke"
 ],
-video:"https://ovelsesbank.golfforbundet.no/ovelser/alle-ovelser/planken-chipping",
-bilde:"images/exercises/chipping/planke_chip.jpg"
+videoFile:"images/videos/chipping/planke_chip.mp4"
 },
 
 {navn:"Chippe crosshanded", 
-tid:"Tid: 5 min",
+tid:"Tid: 1 min",
 fokus:["Rolige hender","Stabil stroke"],
 fremgang:[
 "Denne øvelsen kan benyttes på to ulike måter",
@@ -51,8 +48,7 @@ fremgang:[
 "Dette er en kanon øvelse for utøvere som har stor høyretilt i ryggsøylen (høyre skulder veldig lav)",
 "2. Teknikkøvelse: Hvorfor ikke teste å slå crosshanded? Matt Fitzpatrick fra PGA-touren sverger til dette!"
 ],
-video:"https://ovelsesbank.golfforbundet.no/ovelser/alle-ovelser/chippe-crosshanded",
-bilde:"images/exercises/chipping/cross.jpg"
+videoFile:"images/videos/chipping/cross.mp4"
 },
 
 {navn:"Puttechippen", 
@@ -65,8 +61,7 @@ fremgang:[
 "Ballposisjonen under eller før ballen",
 "Dette gir gode forutsetninger for stabilitet i både retning og balltreff"
 ],
-video:"https://ovelsesbank.golfforbundet.no/ovelser/alle-ovelser/puttechippen",
-bilde:"images/exercises/chipping/puttechip.jpg"
+videoFile:"images/videos/chipping/puttechip.mp4"
 },
 
 {navn:"Chippeløype - ABC", 
