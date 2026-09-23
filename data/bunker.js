@@ -1,7 +1,7 @@
 const bunker = [
 
 {navn:"Streken - Bunker", 
-tid:"Tid: 5 min",
+tid:"Tid: 2 min",
 fokus:["Treff sanden samme sted","Konsistent kontakt"],
 fremgang:[
 "Lag en strek i sanden hvor man ønsker å treffe sanden",
@@ -12,8 +12,7 @@ fremgang:[
 "Denne øvelsen kan bygges inn som første steg til Iphone",
 "Kan brukes til å trene lange slag. Streken gir et klart svar på hvor i sanden køllen treffer"
 ],
-video:"https://ovelsesbank.golfforbundet.no/ovelser/alle-ovelser/streken",
-bilde:"images/exercises/bunker/streken.jpg"
+videoFile:"images/videos/bunker/streken.mp4"
 },
 
 {navn:"iPhone drill", 
@@ -24,8 +23,7 @@ fremgang:[
 "Steg 1: Her skal utøverne prøve å slå bort sanden inne i iPhone. Inngangen i sanden skal være der Iphone starter",
 "Steg 2: Legg en golfball midt inni Iphone gjør akkurat samme som i steg en og opplev at ballen flyr ut av bunkeren"
 ],
-video:"https://ovelsesbank.golfforbundet.no/ovelser/alle-ovelser/iphone-mobilen",
-bilde:"images/exercises/bunker/iphone.jpg"
+videoFile:"images/videos/bunker/iphone.mp4"
 }
 
 ];
