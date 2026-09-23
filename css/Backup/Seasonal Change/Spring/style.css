@@ -1,0 +1,1734 @@
+/* ===================================================
+        ROOT THEME - SPRING THEME
+=================================================== */
+
+:root {
+
+/* =====*===================
+   GLOBAL DESIGN SYSTEM
+========================= */
+
+  /* Main Theme */
+
+--background-color: #18281f;
+
+--primary-color: #8adf7c;
+--primary-light-color: #d7f5b8;
+
+--spring-pink: #f6b7c8;
+
+--spring-pink-light: #ffd9e4;
+
+--spring-pink-glow: rgba(246,183,200,0.35);
+
+
+  --text-color: #ffffff;
+
+  --secondary-text-color: rgba(255,255,255,0.65);
+
+
+  /* Status Colors */
+
+  --success-color: #1fa463;
+
+  --warning-color: #ff9900;
+
+  --danger-color: #ff3333;
+
+  --workout-start-color: #f59e0b;
+
+
+  /* Borders */
+
+  --border-light: rgba(255,255,255,0.08);
+
+  --border-medium: rgba(255,255,255,0.12);
+
+  --border-strong: rgba(255,255,255,0.15);
+
+  --primary-border: rgba(246,183,200,0.3);
+
+  --primary-border-hover: rgba(246,183,200,0.35);
+
+
+  /* Radius */
+
+  --radius-large: 20px;
+
+  --radius-medium: 16px;
+
+  --radius-small: 12px;
+
+  --radius-button: 10px;
+
+  --radius-pill: 999px;
+
+
+  /* Shadows */
+
+  --shadow-soft: 0 10px 25px rgba(0,0,0,0.35);
+
+  --shadow-card: 0 8px 20px rgba(0,0,0,0.45);
+
+  --shadow-hover: 0 12px 25px rgba(0,0,0,0.6);  
+
+
+  /* Typography */
+
+  --font-family: Arial;
+
+  --heading-size: 30px;
+
+  --text-small: 13px;
+
+  --text-medium: 16px;
+
+  --card-font-size: 18px;
+
+  --font-weight-bold: 700;
+
+  --h1-margin-bottom: 8px;
+
+  --brand-letter-spacing: 2px;
+
+  --title-line-height: 1.2;
+
+  --title-shadow:
+    0 3px 10px rgba(0,0,0,0.6);
+
+  --heading-shadow:
+    0 2px 8px rgba(0,0,0,0.3);
+
+  --brand-shadow:
+    0 2px 6px rgba(0,0,0,0.5);
+
+  --brand-color:
+    rgba(255,255,255,0.8);
+
+
+  /* Layout */
+
+  --screen-max-width: 600px;
+
+  --screen-padding: 20px;
+
+  --navbar-height: 65px;
+
+  --content-bottom-spacing: 80px;
+
+  --hero-offset-top: -20px;
+
+  --hero-offset-bottom: -100px;
+
+  --hero-image-max-width: 350px;
+
+  --hero-hover-scale: 1.05;
+
+
+/* ================================
+   COMPONENT VARIABLES
+================================ */
+
+  /* Card Colors */
+
+--card-gradient-start: #20352a;
+--card-gradient-end: #16261d;
+
+--card-border-color:
+rgba(246,183,200,0.18);
+
+  --filter-active-start: #145236;
+
+  --filter-active-end: #11422c;
+
+
+  /* Card Layout */
+
+  --card-padding-y: 18px;
+
+  --card-padding-x: 20px;
+
+  --card-margin-y: 14px;
+
+  --card-icon-gap: 10px;
+
+  --card-arrow-size: 24px;
+
+  --card-arrow-opacity: 0.6;
+
+
+
+  /* Buttons */
+
+  --button-padding: 15px;
+
+  --button-margin-top: 10px;
+
+  --button-radius: var(--radius-button);
+
+  --button-font-size: var(--text-medium);
+
+  --button-gradient-start: var(--primary-color);
+--button-gradient-end: #5ba84f;
+
+  /* Workout Button */
+
+  --workout-button-font-size: 1.2rem;
+
+  --workout-button-padding: 16px;
+
+  --workout-button-margin-bottom: 20px;
+
+  --workout-button-radius: 12px;
+
+  --workout-glow-strong:
+    0 0 25px rgba(245,158,11,0.9);
+
+  --workout-glow-soft:
+    0 0 50px rgba(245,158,11,0.5);
+
+  --shine-opacity: rgba(255,255,255,0.25);
+
+
+
+  /* Exercise Components */
+
+  --exercise-pill-padding:
+    6px 12px;
+
+  --exercise-pill-radius:
+    var(--radius-pill);
+
+  --exercise-pill-background:
+    rgba(246,183,200,0.15);
+
+  --exercise-pill-border:
+    rgba(246,183,200,0.3);
+
+  --exercise-pill-color:
+    var(--primary-light-color);
+
+  --exercise-badge-font-size:
+    var(--text-small);
+
+  --exercise-tag-font-size:
+    10px;
+
+  --exercise-tag-gap: 8px;
+
+  --exercise-tag-margin-bottom: 18px;
+
+  --exercise-badge-margin-bottom: 12px;
+
+
+
+  /* Timer */
+
+  --timer-gap-small: 10px;
+
+  --timer-gap-large: 12px;
+
+  --timer-margin-top: 15px;
+
+  --timer-buttons-margin-top: 20px;
+
+  --timer-button-max-width: 130px;
+
+  --timer-button-min-width: 120px;
+
+  --timer-button-padding:
+    14px 24px;
+
+  --timer-button-radius: 14px;
+
+  --timer-button-font-weight: 600;
+
+  --timer-button-letter-spacing: 0.5px;
+
+  --timer-button-border:
+    rgba(255,255,255,0.15);
+
+--timer-gradient-start: #88d778;
+--timer-gradient-end: #65bb57;
+
+--timer-hover-start: #9be58b;
+--timer-hover-end: #7acc67;
+
+
+  /* Progress Bar */
+
+  --progress-padding: 15px;
+
+  --progress-margin-bottom: 20px;
+
+  --progress-radius: var(--radius-medium);
+
+  --progress-track-radius: var(--radius-pill);
+
+  --progress-track-height: 12px;
+
+  --progress-title-size: 12px;
+
+  --progress-text-size: 15px;
+
+  --progress-title-spacing: 2px;
+
+  --progress-text-weight: 600;
+
+  --progress-background:
+    rgba(255,255,255,0.04);
+
+  --progress-border:
+    rgba(255,255,255,0.08);
+
+  --progress-track-background:
+    rgba(255,255,255,0.12);
+
+  --progress-title-color:
+    var(--secondary-text-color);
+
+--progress-fill-start: #7bcf6b;
+
+--progress-fill-end: #f6b7c8;
+
+  --progress-text-color:
+    var(--primary-light-color);
+
+
+  
+
+
+  /* Responsive */
+
+  --mobile-max-width: 500px;
+
+  --hero-mobile-gap: 10px;
+
+  --hero-mobile-max-width: 220px;
+
+}
+
+/* ===================================================
+        GLOBAL LAYOUT
+=================================================== */
+
+body {
+  margin: 0;
+  font-family: var(--font-family);
+background:
+radial-gradient(
+  circle at top,
+  rgba(246,183,200,0.12),
+  transparent 35%
+),
+radial-gradient(
+  circle at bottom,
+  rgba(183,235,143,0.06),
+  transparent 45%
+),
+var(--background-color);
+  color: var(--text-color);
+}
+
+.screen {
+  display: none;
+
+  padding: var(--screen-padding);
+
+  padding-bottom: var(--content-bottom-spacing);
+
+  max-width: var(--screen-max-width);
+
+  margin: auto;
+}
+
+.active {
+  display: block;
+}
+
+
+/* ===================================================
+   TYPOGRAPHY
+=================================================== */
+
+h1 {
+  font-size: var(--heading-size);
+
+  font-weight: var(--font-weight-bold);
+
+  margin-bottom: var(--h1-margin-bottom);
+
+  text-shadow: var(--heading-shadow);
+
+  animation: titleReveal 0.4s ease;
+}
+
+h2 {
+  margin-top: 0;
+
+  color: var(--primary-color);
+}
+
+b {
+  display: block;
+
+  margin-top: 10px;
+
+  margin-bottom: 5px;
+
+  color: var(--primary-color);
+}
+
+.app-title {
+  font-size: var(--heading-size);
+
+  font-weight: var(--font-weight-bold);
+
+  line-height: var(--title-line-height);
+
+  text-shadow: var(--title-shadow);
+}
+
+.brand {
+  font-size: var(--text-small);
+
+  letter-spacing: var(--brand-letter-spacing);
+
+  color: var(--brand-color);
+
+  text-shadow: var(--brand-shadow);
+}
+
+
+
+/* ===================================================
+   MEDIA
+=================================================== */
+
+
+img {
+  width:100%;
+  border-radius:20px;
+  margin-bottom:20px;
+
+  border: 1px solid rgba(255,255,255,0.08);
+
+  box-shadow:
+    0 10px 25px rgba(0,0,0,0.35);
+}
+
+
+.exercise-video {
+
+  object-fit: cover;
+
+  width: 100%;
+
+  border-radius: var(--radius-large);
+
+  border: 1px solid rgba(255,255,255,0.08);
+
+  box-shadow:
+    0 10px 25px rgba(0,0,0,0.35);
+
+  margin-bottom: 20px;
+
+  display: block;
+
+  transition: all 0.25s ease;
+
+  animation: mediaReveal 0.4s ease;
+
+}
+
+.exercise-video:not(:hover) {
+
+  filter: saturate(0.95);
+
+}
+
+.exercise-video:hover {
+
+  transform: translateY(-2px);
+
+  box-shadow:
+    0 16px 35px rgba(0,0,0,0.45),
+    0 0 18px rgba(246,183,200,0.2);
+
+}
+
+
+/* ==*================================================
+        LISTS & TEXT CONTENT
+=================================================== */
+
+
+ul {
+  list-style: none;   /* fjerner bulletpoints */
+  padding-left: 0;
+}
+
+li {
+  margin-bottom: 4px;
+}
+
+li::before {
+  content: "- ";      /* legger til bindestrek */
+}
+
+
+.fremgang li::before {
+  content: "";
+}
+
+.fremgang-linje {
+  margin-bottom: 8px;
+  line-height: 1.4;
+}
+
+.fremgang-linje strong {
+  color: #1fa463;
+  margin-right: 8px;
+  display: inline-block;
+}
+
+.exercise-repetisjon {
+  margin-bottom: 22px;
+  font-size: 17px;
+}
+
+
+
+/* ==*================================================
+        CARDS
+=================================================== */
+
+.card {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+
+  padding:
+  var(--card-padding-y)
+  var(--card-padding-x);
+
+  margin:
+  var(--card-margin-y)
+  0;
+
+  border-radius: var(--radius-large);
+
+  background: linear-gradient(145deg,
+  var(--card-gradient-start),
+  var(--card-gradient-end)
+);
+
+  border: 1px solid var(--card-border-color);
+
+  box-shadow: var(--shadow-card);
+
+  font-size: var(--card-font-size);
+  cursor: pointer;
+
+  transition: all 0.2s ease;
+  animation: cardFade 0.4s ease;
+}
+
+.card:hover {
+  transform: translateY(-3px) scale(1.01);
+
+  box-shadow:
+    var(--shadow-hover),
+    0 0 14px rgba(246,183,200,0.18);
+}
+
+.card:hover .arrow {
+  transform: translateX(5px);
+  opacity: 1;
+}
+
+.card:active {
+  transform: scale(0.97);
+}
+
+
+.card .left {
+  display: flex;
+  align-items: center;
+  gap: var(--card-icon-gap);
+}
+
+
+.card .arrow {
+  font-size: var(--card-arrow-size);
+
+  opacity: var(--card-arrow-opacity);
+  transition: all 0.2s ease;
+}
+
+
+/* ===================================================
+   BUTTONS
+=================================================== */
+
+button {
+
+  width: 100%;
+
+  padding: var(--button-padding);
+
+  margin-top: var(--button-margin-top);
+
+  border: none;
+
+  border-radius: var(--button-radius);
+
+  background: linear-gradient(
+    145deg,
+    var(--button-gradient-start),
+    var(--button-gradient-end)
+  );
+
+  color: var(--text-color);
+
+  font-size: var(--button-font-size);
+
+}
+
+
+.start-workout-btn {
+  width: 100%;
+position: relative;
+overflow: hidden;
+animation: pulseGlow 2.5s infinite;
+  background: var(--workout-start-color);
+  color: var(--text-color);
+  font-size: var(--workout-button-font-size);
+  font-weight: bold;
+  padding: var(--workout-button-padding);
+  margin-bottom: var(--workout-button-margin-bottom);
+  border: none;
+  border-radius: var(--workout-button-radius);
+}
+
+.start-workout-btn:hover {
+
+  animation-play-state: paused;
+
+  box-shadow:
+   var(--workout-glow-strong),
+   var(--workout-glow-soft);
+
+}
+
+
+.start-workout-btn:active {
+
+  transform: scale(0.98);
+
+}
+
+.start-workout-btn::before {
+
+  content: "";
+
+  position: absolute;
+
+  top: 0;
+  left: -100%;
+
+  width: 100%;
+  height: 100%;
+
+  background: linear-gradient(
+    90deg,
+    transparent,
+    var(--shine-opacity),
+    transparent
+  );
+
+  transition: left 0.6s ease;
+
+}
+
+.start-workout-btn:hover::before {
+
+  left: 100%;
+
+}
+
+
+/* ===================================================
+   NAVIGATIONS
+=================================================== */
+
+.navbar {
+  position:fixed;
+  bottom:0;
+  width:100%;
+  height:65px;
+  display:flex;
+  background: rgba(34,48,40,0.85);
+  backdrop-filter: blur(18px);
+  border-top:1px solid rgba(255,255,255,0.1);
+  box-shadow:
+  0  -5px  25px  rgba(0,0,0,0.3);
+}
+
+.navbar button {
+  flex:1;
+  border-radius:0;
+  background:none;
+  color:white;
+  font-size:14px;
+}
+
+
+/* ===================================================
+   HERO
+=================================================== */
+
+.hero-image {
+  text-align: center;
+
+  margin-top: var(--hero-offset-top);
+
+  margin-bottom: var(--hero-offset-bottom);
+
+  position: relative;
+
+  z-index: 1;
+
+  pointer-events: none;
+}
+
+.hero-image img {
+  width: 100%;
+  max-width: var(--hero-image-max-width);
+  height: auto;
+  border: none;
+  box-shadow: none;
+  border-radius: 0;
+  filter:
+    drop-shadow(
+      0 0 18px rgba(246,183,200,0.28)
+    );
+
+
+  /* gir samme “fade” effekt som bildet ditt */
+  mask-image: linear-gradient(to bottom, black 70%, transparent);
+  -webkit-mask-image: linear-gradient(to bottom, black 70%, transparent);
+}
+
+.hero:hover .hero-img {
+  transform: scale(var(--hero-hover-scale));
+}
+
+
+
+/* ===================================================
+   TIMER
+=================================================== */
+
+
+.timer-controls {
+  display: flex;
+  justify-content: center;
+  gap: var(--timer-gap-small);
+
+  margin-top: var(--timer-margin-top);
+}
+
+.timer-controls button {
+  flex: 1;
+  max-width: var(--timer-button-max-width);
+  width: auto !important;
+  margin-top: 0;
+}
+
+.timer-buttons {
+  display: flex;
+  justify-content: center;
+  gap: var(--timer-gap-large);
+
+  margin-top: var(--timer-buttons-margin-top);
+  animation: fadeButtons 0.25s ease;
+}
+
+
+
+.timer-buttons button {
+  min-width: var(--timer-button-min-width);
+
+  padding: var(--timer-button-padding);
+
+  border: 1px solid var(--timer-button-border);
+
+  border-radius: var(--timer-button-radius);
+
+  background: linear-gradient(
+    145deg,
+    var(--timer-gradient-start),
+    var(--timer-gradient-end)
+  );
+
+  color: white;
+
+  font-weight: var(--timer-button-font-weight);
+
+  letter-spacing: var(--timer-button-letter-spacing);
+
+  box-shadow:
+    0 6px 18px rgba(0,0,0,0.35),
+    inset 0 1px 0 rgba(255,255,255,0.15);
+
+  transition: all 0.25s ease;
+}
+
+.timer-buttons button:first-child {
+  flex: 1.3;
+}
+
+.timer-buttons button:first-child:hover {
+  box-shadow:
+    0 0 20px rgba(246,183,200,0.55),
+    0 10px 24px rgba(0,0,0,0.4);
+}
+
+
+.timer-buttons button:hover {
+  transform: translateY(-3px);
+
+  background: linear-gradient(
+    145deg,
+    var(--timer-hover-start),
+    var(--timer-hover-end)
+  );
+
+  box-shadow:
+    0 10px 24px rgba(0,0,0,0.45),
+    0 0 15px rgba(246,183,200,0.4);
+}
+
+
+.timer-buttons button:active {
+  transform: translateY(1px) scale(0.97);
+
+  box-shadow:
+    0 4px 10px rgba(0,0,0,0.3);
+}
+
+.timer-container {
+
+  display: flex;
+  justify-content: center;
+  margin: 20px 0;
+
+}
+
+
+/* ===================================================
+   PROGRESS BAR
+=================================================== */
+
+
+.progress-bar {
+
+  transition: all 0.25s ease;
+  
+  margin-bottom: var(--progress-margin-bottom);
+
+  padding: var(--progress-padding);
+
+  border-radius: var(--progress-radius);
+
+  background: var(--progress-background);
+
+  border: 1px solid var(--progress-border);
+
+  backdrop-filter: blur(10px);
+
+}
+
+
+.progress-bar:hover {
+
+  border-color: rgba(246,183,200,0.3);
+
+  box-shadow:
+    0 0 12px rgba(246,183,200,0.15);
+
+}
+
+.progress-title {
+
+  text-align: center;
+
+  font-size: var(--progress-title-size);
+
+  font-weight: var(--progress-text-weight);
+
+  letter-spacing: var(--progress-title-spacing);
+
+  text-transform: uppercase;
+
+  color: var(--progress-title-color);
+
+  margin-bottom: 10px;
+
+}
+
+.progress-track {
+  height: var(--progress-track-height);
+  border-radius: var(--progress-track-radius);
+  background: var(--progress-track-background);
+  overflow: hidden;
+}
+
+.progress-fill {
+position: relative;
+overflow: hidden;
+height: 100%;
+transition: 
+   width 0.7s cubic-bezier(.4,0,.2,1),
+   box-shadow 0.7s ease;
+
+  background: linear-gradient(
+    90deg,
+    var(--progress-fill-start),
+    var(--progress-fill-end)
+  );
+
+  border-radius:
+   var(--progress-track-radius);
+
+  box-shadow:
+    0 0 12px rgba(246,183,200,0.5),
+    0 0 25px rgba(246,183,200,0.35);
+
+
+  animation: progressGlow 2.5s infinite alternate;
+}
+
+.progress-fill::after {
+
+  content: "";
+
+  position: absolute;
+
+  top: 0;
+  left: -30%;
+
+  width: 30%;
+  height: 100%;
+
+  background: linear-gradient(
+    90deg,
+    transparent,
+    rgba(255,255,255,0.35),
+    transparent
+  );
+
+  animation: progressShine 2.5s infinite;
+
+}
+
+
+.progress-text {
+  text-align: center;
+  margin-top: 8px;
+  font-size: var(--progress-text-size);
+  font-weight: var(--progress-text-weight);
+  color: var(--progress-text-color);
+}
+
+
+
+
+/* ===================================================
+   EXERCISE COMPONENTS
+=================================================== */
+
+.exercise-badge {
+
+  display: inline-block;
+
+  padding: var(--exercise-pill-padding);
+
+  margin-bottom: var(--exercise-badge-margin-bottom);
+
+  border-radius: var(--exercise-pill-radius);
+
+  background: var(--exercise-pill-background);
+
+  border: 1px solid var(--exercise-pill-border);
+
+  color: var(--exercise-pill-color);
+
+  font-size: var(--exercise-badge-font-size);
+
+  font-weight: 600;
+
+}
+
+.exercise-tag {
+
+  padding: var(--exercise-pill-padding);
+
+  border-radius: var(--exercise-pill-radius);
+
+  background: var(--exercise-pill-background);
+
+  border: 1px solid var(--exercise-pill-border);
+
+  color: var(--exercise-pill-color);
+
+  font-size: var(--exercise-tag-font-size);
+
+  font-weight: 500;
+  
+  transition: 
+     transform 0.2s ease,
+     box-shadow 0.2s ease;
+
+}
+
+.exercise-tag:hover {
+
+  transform: translateY(-2px);
+
+  box-shadow:
+    0 0 12px rgba(246,183,200,0.3);
+
+}
+
+.tag-container {
+
+  display: flex;
+
+  flex-wrap: wrap;
+
+  gap: var(--exercise-tag-gap);
+
+  margin-bottom: var(--exercise-tag-margin-bottom);
+
+}
+
+
+/* ===================================================
+   STRENGTH FILTERS
+=================================================== */
+
+/* Filter Container */
+.strength-filters {
+
+  display: flex;
+
+  flex-wrap: wrap;
+
+  justify-content: center;
+
+  gap: 8px;
+
+  padding-bottom: 10px;
+
+  margin-bottom: 15px;
+
+}
+
+
+.strength-filters::-webkit-scrollbar {
+  display: none;
+}
+
+/* Filter Buttons */
+.strength-filters button,
+.strength-all button {
+
+  width: auto;
+
+  margin-top: 0;
+
+  padding: 10px 16px;
+
+  border-radius: 999px;
+
+  border: 1px solid rgba(255,255,255,0.12);
+
+  background: rgba(255,255,255,0.06);
+
+  backdrop-filter: blur(10px);
+
+  color: white;
+
+  font-size: 13px;
+
+  font-weight: 600;
+
+  box-shadow:
+    0 6px 14px rgba(0,0,0,0.2);
+
+  transition: all 0.25s ease;
+}
+
+/* Active Filter State */
+.active-filter {
+
+  background: linear-gradient(
+    145deg,
+    #2b6240,
+    #214d33
+  );
+
+  border: 1px solid rgba(246,183,200,0.35);
+
+  font-weight: 700;
+
+  transform: scale(1.10);
+
+  box-shadow:
+    0 8px 20px rgba(0,0,0,0.45);
+
+}
+
+
+.active-filter:hover {
+
+  transform: scale(1.08) translateY(-2px);
+
+}
+
+
+.strength-filters button.active-filter,
+.strength-all button.active-filter {
+  color: #d7f5b8 !important;
+}
+
+/* "Alle Øvelser" Container */
+.strength-all {
+
+  display: flex;
+
+  justify-content: center;
+
+  margin-bottom: 12px;
+
+}
+
+
+/* "Alle Øvelser" Button */
+.strength-all button {
+
+  width: auto;
+
+  min-width: 140px;
+
+  padding: 10px 22px;
+
+  margin-top: 0;
+
+  border-radius: 999px;
+
+  font-size: 13px;
+
+  font-weight: 600;
+
+}
+
+/* Hover States */
+.strength-filters button:hover,
+.strength-all button:hover {
+
+  transform: translateY(-2px);
+
+  border-color: rgba(246,183,200,0.35);
+
+  box-shadow:
+    0 10px 20px rgba(0,0,0,0.3);
+
+}
+
+/* ===================================================
+   SCORECARD BUTTON
+=================================================== */
+
+.scorecard-btn-container {
+
+  display: flex;
+
+  justify-content: flex-start;
+
+  margin: 10px 0 15px;
+
+}
+
+.scorecard-btn {
+
+  position: relative;
+
+  overflow: hidden;
+
+  width: auto;
+
+  margin-top: 0;
+
+  padding: 10px 18px;
+
+  font-size: 14px;
+
+  font-weight: 600;
+
+  border: 1px solid rgba(255,255,255,0.12);
+
+  box-shadow:
+    0 6px 14px rgba(0,0,0,0.25);
+
+  transition:
+    transform 0.2s ease,
+    box-shadow 0.2s ease,
+    filter 0.2s ease;
+
+}
+
+.scorecard-btn::before {
+
+  content: "";
+
+  position: absolute;
+
+  top: 0;
+  left: -100%;
+
+  width: 100%;
+  height: 100%;
+
+  background: linear-gradient(
+    90deg,
+    transparent,
+    rgba(255,255,255,0.18),
+    transparent
+  );
+
+  transition: left 0.5s ease;
+
+}
+
+.scorecard-btn:hover::before {
+
+  left: 100%;
+
+}
+
+.scorecard-btn:hover {
+
+  transform: translateY(-2px);
+
+  box-shadow:
+    0 10px 20px rgba(0,0,0,0.35),
+    0 0 12px rgba(246,183,200,0.25);
+
+  filter: brightness(1.05);
+
+}
+
+.scorecard-btn:active {
+
+  transform: scale(0.98);
+
+  box-shadow:
+    0 4px 10px rgba(0,0,0,0.25);
+
+}
+
+
+
+/* ===================================================
+   MODAL
+=================================================== */
+
+.modal-overlay {
+
+  position: fixed;
+  inset: 0;
+
+  display: flex;
+  justify-content: center;
+  align-items: center;
+
+  background: rgba(0,0,0,0.75);
+
+  opacity: 0;
+  visibility: hidden;
+
+  transition: 0.25s ease;
+
+  z-index: 3000;
+}
+
+.modal-overlay.active {
+
+  opacity: 1;
+  visibility: visible;
+}
+
+.modal {
+
+  width: min(90%, 700px);
+
+  background: linear-gradient(
+	145deg,
+	var(--card-gradient-start),
+	var(--card-gradient-end)
+       );
+
+border: 1px solid rgba(246,183,200,0.18);
+
+  border-radius: var(--radius-large);
+
+  padding: 24px;
+
+box-shadow:
+	0 0 20px rgba(246,183,200,0.12),
+	0 15px 40px rgba(0,0,0,0.45);
+
+  position: relative;
+
+  max-height: 80vh;
+
+  overflow-y: auto;
+}
+
+.modal-close {
+
+  position: absolute;
+
+  top: 12px;
+  right: 12px;
+
+  width: 40px;
+  height: 40px;
+
+  border-radius: 50%;
+
+  cursor: pointer;
+}
+
+.scorecard-best {
+
+  text-align: center;
+  margin-bottom: 20px;
+
+}
+
+.scorecard-best div {
+
+  font-size: 24px;
+  font-weight: 700;
+  margin-top: 10px;
+
+}
+
+.scorecard-input {
+
+  margin-bottom: 20px;
+
+}
+
+.scorecard-input input {
+
+  width: 100%;
+  padding: 12px;
+  font-size: 18px;
+  margin-top: 8px;
+
+}
+
+.score-row {
+
+  display:flex;
+
+  justify-content:space-between;
+
+  align-items:center;
+
+  padding: 10px;
+
+  margin: 5px 0;
+
+  background: rgba(255,255,255,0.05);
+
+  border-radius: var(--radius-button);
+
+}
+
+.score-up {
+
+  color:#1fa463;
+
+  font-weight:700;
+
+}
+
+.score-down {
+
+  color:#ff3333;
+
+  font-weight:700;
+
+}
+
+.score-equal {
+
+  color:#bbbbbb;
+
+  font-weight:700;
+
+}
+
+.score-actions {
+
+  display: flex;
+
+  gap: 10px;
+
+  margin-top: 15px;
+
+}
+
+.score-actions button {
+
+  flex: 1;
+
+  margin-top: 0;
+
+}
+
+.new-pb-badge {
+
+  background:
+linear-gradient(
+145deg,
+#f6b7c8,
+#ffd9e4
+);
+
+color: #214d33;
+
+  text-align:center;
+
+  padding:12px;
+
+border: 1px solid rgba(255,255,255,0.25);
+
+box-shadow:
+  0 0 16px rgba(246,183,200,0.35);
+
+
+  border-radius:12px;
+
+  font-weight:700;
+
+  margin-bottom:15px;
+
+  animation:
+    pulsePB 1.5s infinite;
+
+}
+
+
+.confetti-overlay {
+
+  position: fixed;
+
+  inset: 0;
+
+  pointer-events: none;
+
+  overflow: hidden;
+
+  z-index: 99999;
+
+}
+
+
+
+.confetti-piece {
+
+  position: absolute;
+
+  top: -30px;
+
+  width: 12px;
+
+  height: 12px;
+
+  border-radius: 2px;
+
+  opacity: 0.95;
+
+  animation:
+    confettiFall linear forwards;
+
+}
+
+
+
+
+/* ===================================================
+   CONFIRM MODAL
+=================================================== */
+
+.confirm-actions {
+
+  display: flex;
+
+  flex-direction: column;
+
+  gap: 10px;
+
+  margin-top: 20px;
+}
+
+.confirm-btn {
+
+  background: #1fa463;
+}
+
+.confirm-btn:hover {
+
+  background: #32d17a;
+}
+
+.cancel-btn {
+
+  background: #444;
+}
+
+.delete-btn {
+
+  background: #d62828;
+}
+
+.delete-btn:hover {
+
+  background: #ef4444;
+}
+
+
+/* ===================================================
+   PAGE TRANSITIONS
+=================================================== */
+
+#category {
+  animation: exerciseFade 0.25s ease;
+}
+
+
+#exercise {
+
+  transition: 
+     opacity 0.3s ease;
+  animation: exerciseFade 0.35s ease;
+
+}
+
+/* ===================================================
+   ANIMATIONS
+=================================================== */
+
+@keyframes fadeButtons {
+  from {
+    opacity: 0;
+    transform: translateY(5px);
+  }
+
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+
+@keyframes pulseGlow {
+
+  0% {
+    transform: scale(1);
+    box-shadow: 0 0 8px rgba(245,158,11,0.4);
+  }
+
+  50% {
+    transform: scale(1.02);
+    box-shadow:
+      0 0 20px rgba(245,158,11,0.7),
+      0 0 40px rgba(245,158,11,0.4);
+  }
+
+  100% {
+    transform: scale(1);
+    box-shadow: 0 0 8px rgba(245,158,11,0.4);
+  }
+
+}
+
+
+@keyframes progressGlow {
+
+  from {
+    box-shadow:
+      0 0 8px rgba(246,183,200,0.35),
+      0 0 18px rgba(246,183,200,0.2);
+  }
+
+  to {
+    box-shadow:
+      0 0 16px rgba(246,183,200,0.7),
+      0 0 32px rgba(246,183,200,0.35);
+  }
+
+}
+
+
+@keyframes progressShine {
+
+  from {
+    left: -30%;
+  }
+
+  to {
+    left: 130%;
+  }
+
+}
+
+
+@keyframes exerciseFade {
+
+  from {
+    opacity: 0;
+    transform: translateY(10px);
+  }
+
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+
+}
+
+
+
+@keyframes cardFade {
+
+  from {
+    opacity: 0;
+    transform: translateY(10px);
+  }
+
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+
+}
+
+
+@keyframes titleReveal {
+
+  from {
+    opacity: 0;
+    transform: translateY(8px);
+  }
+
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+
+}
+
+
+@keyframes mediaReveal {
+
+  from {
+    opacity: 0;
+    transform: scale(0.96);
+  }
+
+  to {
+    opacity: 1;
+    transform: scale(1);
+  }
+
+}
+
+
+@keyframes confettiFall {
+
+  0% {
+
+    transform:
+      translateX(0)
+      translateY(0)
+      rotate(0deg);
+
+    opacity: 1;
+
+  }
+
+  100% {
+
+    transform:
+      translateX(var(--drift))
+      translateY(120vh)
+      rotate(1080deg);
+
+    opacity: 0;
+
+  }
+
+}
+
+
+@keyframes pulsePB {
+
+  0% {
+
+    transform: scale(1);
+
+  }
+
+  50% {
+
+    transform: scale(1.03);
+
+  }
+
+  100% {
+
+    transform: scale(1);
+
+  }
+
+}
+
+
+
+
+
+/* ===================================================
+   RESPONSIVE
+=================================================== */
+
+@media (max-width: 500px) {
+  .hero {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: var(--hero-mobile-gap);
+  }
+
+  .hero-img {
+    width: 100%;
+    max-width: var(--hero-mobile-max-width);
+    align-self: center;
+  }
+}
