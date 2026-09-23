@@ -9,8 +9,7 @@ fremgang:[
 "I øvelsen skal baksvingen og nedsvingen gå til samme peggfarge slik illustrasjonen viser",
 "Dette er en fin øvelse for golferen som 'hugger' på ballen når de putter"
 ],
-video:"https://ovelsesbank.golfforbundet.no/ovelser/alle-ovelser/pegg-til-pegg",
-bilde:"images/exercises/putting/pegg_putting.jpg"
+videoFile:"images/videos/putting/pegg_putting.mp4"
 },
 
 {navn:"Sko Leken", 
