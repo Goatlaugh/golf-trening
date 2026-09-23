@@ -64,6 +64,22 @@ const styrke = [
 },
 
 
+{
+  navn: "Russian Twist",
+
+  muskelgruppe: ["Mage",
+    		 "Dyp kjernemuskulatur"],
+
+  repetisjon: "15 x 3 sett",
+
+  utstyr: ["Vekt"],
+
+  styrkeTag: ["Mage", "Kjernemuskulatur"],
+
+  bilde:"images/exercises/styrke/russian.jpg"
+},
+
+
 
 {
   navn: "Planken med rotasjon",
@@ -132,6 +148,21 @@ const styrke = [
 },
 
 
+{
+  navn: "Jump Squat",
+
+  muskelgruppe: ["Forside lår",
+    		 "Setemuskulatur",
+    		 "Bakside lår",
+    		 "Kjernemuskulatur"],
+
+  repetisjon: "10 x 3 sett",
+
+  styrkeTag: ["Ben", "Kjernemuskulatur"],
+
+  bilde:"images/exercises/styrke/jumpsquat.jpg"
+},
+
 
 {
   navn: "Utfall bakover med rotasjon",
@@ -198,6 +229,22 @@ const styrke = [
   styrkeTag: ["Ben"],
 
   videoFile: "images/videos/styrke/taahev.mp4"
+},
+
+{
+  navn: "Benpress",
+
+  muskelgruppe: ["Forside lår",
+    		 "Setemuskulatur",
+    		 "Bakside lår"],
+
+  repetisjon: "Sett 1: 12 reps - lav vekt, Sett 2: 6 reps - tyngre vekt, Sett 3: 6 reps - samme vekt, Sett 4: 12 reps - lav vekt",
+
+  utstyr: ["Vekt/Dumbell"],
+
+  styrkeTag: ["Ben"],
+
+  bilde: "images/exercises/styrke/benpress.jpg"
 },
 
 
