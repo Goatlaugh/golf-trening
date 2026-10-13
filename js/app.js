@@ -39,7 +39,7 @@ const CONFIG = {
 
 	BACKGROUND: "#333",
 
-	NORMAL: "#1fa463",
+	NORMAL: "#ff6b1a",
     
 	WARNING: "#ff9900",
     
