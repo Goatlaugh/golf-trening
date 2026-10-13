@@ -1,5 +1,5 @@
 /* ===================================================
-        ROOT THEME
+        ROOT THEME – HALLOWEEN 2026
 =================================================== */
 
 :root {
@@ -10,11 +10,11 @@
 
   /* Main Theme */
 
-  --background-color: #0b2d1f;
+  --background-color: #0a0612;
 
-  --primary-color: #1fa463;
+  --primary-color: #ff6b1a;
 
-  --primary-light-color: #32d17a;
+  --primary-light-color: #ff9f40;
 
   --text-color: #ffffff;
 
@@ -23,26 +23,22 @@
 
   /* Status Colors */
 
-  --success-color: #1fa463;
+  --success-color: #ff6b1a;
 
   --warning-color: #ff9900;
 
   --danger-color: #ff3333;
 
-  --workout-start-color: #f59e0b;
+  --workout-start-color: #ff6b1a;
 
 
   /* Borders */
 
-  --border-light: rgba(255,255,255,0.08);
-
-  --border-medium: rgba(255,255,255,0.12);
-
-  --border-strong: rgba(255,255,255,0.15);
-
-  --primary-border: rgba(31,164,99,0.3);
-
-  --primary-border-hover: rgba(31,164,99,0.35);
+  --border-light: rgba(255,140,0,0.12);
+  --border-medium: rgba(255,140,0,0.18);
+  --border-strong: rgba(255,140,0,0.25);
+  --primary-border: rgba(255,107,26,0.35);
+  --primary-border-hover: rgba(255,107,26,0.5);
 
 
   /* Radius */
@@ -60,11 +56,10 @@
 
   /* Shadows */
 
-  --shadow-soft: 0 10px 25px rgba(0,0,0,0.35);
-
-  --shadow-card: 0 8px 20px rgba(0,0,0,0.45);
-
-  --shadow-hover: 0 12px 25px rgba(0,0,0,0.6);  
+--shadow-soft: 0 10px 25px rgba(0,0,0,0.5);
+--shadow-card: 0 8px 22px rgba(0,0,0,0.55);
+--shadow-hover: 0 14px 30px rgba(0,0,0,0.7);
+ 
 
 
   /* Typography */
@@ -96,8 +91,7 @@
   --brand-shadow:
     0 2px 6px rgba(0,0,0,0.5);
 
-  --brand-color:
-    rgba(255,255,255,0.8);
+--brand-color: rgba(255,200,120,0.85);
 
 
   /* Layout */
@@ -112,11 +106,9 @@
 
   --hero-offset-top: -20px;
 
-  --hero-offset-bottom: -100px;
-
-  --hero-image-max-width: 350px;
-
-  --hero-hover-scale: 1.05;
+--hero-offset-bottom: -110px;
+--hero-image-max-width: 360px;
+--hero-hover-scale: 1.04;
 
 
 /* ================================
@@ -125,15 +117,12 @@
 
   /* Card Colors */
 
-  --card-gradient-start: #12422c;
+--card-gradient-start: #1a0f2e;
+--card-gradient-end: #120a1f;
+--card-border-color: rgba(255,140,0,0.22);
 
-  --card-gradient-end: #0e3323;
-
-  --card-border-color: rgba(150,255,120,0.2);
-
-  --filter-active-start: #145236;
-
-  --filter-active-end: #11422c;
+--filter-active-start: #2a1520;
+--filter-active-end: #1f1018;
 
 
   /* Card Layout */
@@ -164,7 +153,8 @@
 
   --button-gradient-start: var(--primary-color);
 
-  --button-gradient-end: #178a52;
+--button-gradient-end: #d44e00;
+
 
 
   /* Workout Button */
@@ -177,13 +167,14 @@
 
   --workout-button-radius: 12px;
 
-  --workout-glow-strong:
-    0 0 25px rgba(245,158,11,0.9);
+--workout-glow-strong:
+  0 0 28px rgba(255,107,26,0.85);
 
-  --workout-glow-soft:
-    0 0 50px rgba(245,158,11,0.5);
+--workout-glow-soft:
+  0 0 55px rgba(255,107,26,0.45);
 
-  --shine-opacity: rgba(255,255,255,0.25);
+--shine-opacity:
+  rgba(255,220,180,0.3);
 
 
 
@@ -195,14 +186,15 @@
   --exercise-pill-radius:
     var(--radius-pill);
 
-  --exercise-pill-background:
-    rgba(31,164,99,0.15);
+--exercise-pill-background:
+rgba(255,107,26,0.15);
 
-  --exercise-pill-border:
-    rgba(31,164,99,0.3);
+--exercise-pill-border:
+rgba(255,107,26,0.35);
 
-  --exercise-pill-color:
-    var(--primary-light-color);
+--exercise-pill-color:
+var(--primary-light-color);
+
 
   --exercise-badge-font-size:
     var(--text-small);
@@ -244,13 +236,11 @@
   --timer-button-border:
     rgba(255,255,255,0.15);
 
-  --timer-gradient-start: #26b86a;
+--timer-gradient-start: #ff7a2a;
+--timer-gradient-end: #e05a00;
 
-  --timer-gradient-end: #188a50;
-
-  --timer-hover-start: #2cc976;
-
-  --timer-hover-end: #1fa463;
+--timer-hover-start: #ff9a4a;
+--timer-hover-end: #ff6b1a;
 
 
   /* Progress Bar */
@@ -276,11 +266,11 @@
   --progress-background:
     rgba(255,255,255,0.04);
 
-  --progress-border:
-    rgba(255,255,255,0.08);
+--progress-border:
+rgba(255,140,0,0.12);
 
-  --progress-track-background:
-    rgba(255,255,255,0.12);
+--progress-track-background:
+rgba(255,255,255,0.10);
 
   --progress-title-color:
     var(--secondary-text-color);
@@ -654,11 +644,11 @@ animation: pulseGlow 2.5s infinite;
   width:100%;
   height:65px;
   display:flex;
-  background:rgba(10,10,10,0.75);
-  backdrop-filter: blur(18px);
-  border-top:1px solid rgba(255,255,255,0.1);
+  background:rgba(8,4,16,0.88);
+  backdrop-filter: blur(20px);
+  border-top:1px solid rgba(255,140,0,0.15);
   box-shadow:
-  0  -5px  25px  rgba(0,0,0,0.3);
+  0 -6px 28px rgba(0,0,0,0.45);
 }
 
 .navbar button {
@@ -696,9 +686,19 @@ animation: pulseGlow 2.5s infinite;
   box-shadow: none;
   border-radius: 0;
 
-  /* gir samme “fade” effekt som bildet ditt */
-  mask-image: linear-gradient(to bottom, black 70%, transparent);
-  -webkit-mask-image: linear-gradient(to bottom, black 70%, transparent);
+ mask-image: linear-gradient(
+  to bottom,
+  black 55%,
+  rgba(0,0,0,0.85) 75%,
+  transparent 100%
+);
+
+-webkit-mask-image: linear-gradient(
+  to bottom,
+  black 55%,
+  rgba(0,0,0,0.85) 75%,
+  transparent 100%
+);
 }
 
 .hero:hover .hero-img {
@@ -1206,7 +1206,7 @@ transition:
 
   box-shadow:
     0 10px 20px rgba(0,0,0,0.35),
-    0 0 12px rgba(31,164,99,0.25);
+    0 0 12px rgba(255,107,26,0.35);
 
   filter: brightness(1.05);
 
@@ -1226,6 +1226,13 @@ transition:
 /* ===================================================
    MODAL
 =================================================== */
+
+.modal {
+
+  border: 1px solid rgba(255,140,0,0.2);
+
+}
+
 
 .modal-overlay {
 
@@ -1381,11 +1388,11 @@ transition:
 .new-pb-badge {
 
   background:
-    linear-gradient(
-      145deg,
-      #1fa463,
-      #32d17a
-    );
+linear-gradient(
+145deg,
+#ff6b1a,
+#ff9f40
+);
 
   color:white;
 
@@ -1460,12 +1467,12 @@ transition:
 
 .confirm-btn {
 
-  background: #1fa463;
+  background: #ff6b1a;
 }
 
 .confirm-btn:hover {
 
-  background: #32d17a;
+  background: #ff9f40;
 }
 
 .cancel-btn {
